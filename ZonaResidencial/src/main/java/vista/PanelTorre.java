@@ -82,7 +82,7 @@ public class PanelTorre extends JPanel {
 				{null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"idApto", "Residente","# Apto","Valor","Descripcion","Largo","Ancho","m2"
+				"idApto", "Estado","# Apto","Valor","Descripcion","Largo","Ancho","m2"
 			}
 		); 
 		tableApto.setForeground(new Color(0, 0, 0));
@@ -96,6 +96,7 @@ public class PanelTorre extends JPanel {
 		
 		JButton btnBuscar = new JButton("Buscar Torre");
 		btnBuscar.setBounds(110, 11, 120, 23);
+		btnBuscar.addActionListener(new ControladorPanelTorre(this));
 		add(btnBuscar);
 		
 		JLabel lbid = new JLabel("Id");

@@ -1,32 +1,55 @@
 package modelo.otros;
 
-import java.util.*;
 
-/**
- * 
- */
+
 public class ServicioMantenimiento {
+	private int idServicioMantenimiento;
+    private String descripcion;
+    private Double costo;
+    
+    
 
-    /**
-     * Default constructor
-     */
-    public ServicioMantenimiento() {
+    public ServicioMantenimiento(int idServicioMantenimiento, String descripcion, Double costo) {
+		super();
+		this.idServicioMantenimiento = idServicioMantenimiento;
+		this.descripcion = descripcion;
+		this.costo = costo;
+	}
+
+	public ServicioMantenimiento(String descripcion, Double costo) {
+		super();
+		this.descripcion = descripcion;
+		this.costo = costo;
+	}
+
+
+	public ServicioMantenimiento() {
     }
 
-    /**
-     * 
-     */
-    public int idServicioMantenimiento;
+	public int getIdServicioMantenimiento() {
+		return idServicioMantenimiento;
+	}
 
-    /**
-     * 
-     */
-    public String descripcion;
+	public void setIdServicioMantenimiento(int idServicioMantenimiento) {
+		this.idServicioMantenimiento = idServicioMantenimiento;
+	}
 
-    /**
-     * 
-     */
-    public Double costo;
+	public String getDescripcion() {
+		return descripcion;
+	}
 
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(Double costo) {
+		this.costo = costo;
+	}
+    
+    
 
 }

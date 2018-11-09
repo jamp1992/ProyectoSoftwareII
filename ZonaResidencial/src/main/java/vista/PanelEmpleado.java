@@ -3,6 +3,7 @@ package vista;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,6 +26,7 @@ public class PanelEmpleado extends JPanel {
 	public JTextField textUsuario;
 	public JTextField textContrasena;
 	public JTextField textId;
+	public JComboBox comboBoxOpcServicio;
 	public JScrollPane scroll;
     public Object[][] datos;
     public DefaultTableModel modeloTabla;
@@ -49,6 +51,7 @@ public class PanelEmpleado extends JPanel {
 		panelmodificadorCrear.add(lblCedula);
 		textCedula= new JTextField();
 		textCedula.setBounds(200, 20, 100, 20);
+		textCedula.setEnabled(false);
 		panelmodificadorCrear.add(textCedula);
 		
 		JLabel lblNombre= new JLabel("Nombre");
@@ -56,6 +59,7 @@ public class PanelEmpleado extends JPanel {
 		panelmodificadorCrear.add(lblNombre);
 		textNombre= new JTextField();
 		textNombre.setBounds(200, 50, 100, 20);
+		textNombre.setEnabled(false);
 		panelmodificadorCrear.add(textNombre);
 		
 		JLabel lblApellido= new JLabel("Apellido");
@@ -63,6 +67,7 @@ public class PanelEmpleado extends JPanel {
 		panelmodificadorCrear.add(lblApellido);
 		textApellido= new JTextField();
 		textApellido.setBounds(200, 80, 100, 20);
+		textApellido.setEnabled(false);
 		panelmodificadorCrear.add(textApellido);
 		
 		JLabel lblFechaIngreso= new JLabel("Fecha de ingreso");
@@ -73,26 +78,33 @@ public class PanelEmpleado extends JPanel {
 		c.getJCalendar();
 		panelmodificadorCrear.add(c);
 		
-		/*textFechaIngreso= new JTextField();
-		textFechaIngreso.setBounds(200, 110, 100, 20);
-		panelmodificadorCrear.add(textFechaIngreso);*/
-		
 		JLabel lblUsuario= new JLabel("Usuario");
 		lblUsuario.setBounds(100, 140, 100, 20);
 		panelmodificadorCrear.add(lblUsuario);
 		textUsuario= new JTextField();
 		textUsuario.setBounds(200, 140, 100, 20);
+		textUsuario.setEnabled(false);
 		panelmodificadorCrear.add(textUsuario);
 		
-		JLabel lblContrasena= new JLabel("Contraseña");
+		JLabel lblContrasena= new JLabel("Contraseï¿½a");
 		lblContrasena.setBounds(100, 170, 100, 20);
 		panelmodificadorCrear.add(lblContrasena);
 		textContrasena= new JTextField();
 		textContrasena.setBounds(200, 170, 100, 20);
+		textContrasena.setEnabled(false);
 		panelmodificadorCrear.add(textContrasena);
+		
+		
+		JLabel lblServicio= new JLabel("Servicio");
+		lblServicio.setBounds(100, 200, 100, 20);
+		panelmodificadorCrear.add(lblServicio);
+		comboBoxOpcServicio = new JComboBox();       
+		comboBoxOpcServicio.setBounds(200, 200, 100, 20);
+		panelmodificadorCrear.add(comboBoxOpcServicio);
 		
 		JButton btnCrearEmpleado= new JButton("Crear");
 		btnCrearEmpleado.setBounds(10,20,70,20);
+		btnCrearEmpleado.addActionListener(new ControladorPanelEmpleado(this));
 		panelmodificadorCrear.add(btnCrearEmpleado);
 		
 		JButton btnGuardarAuxAdministrativo= new JButton("Guardar Aux. Admin");
@@ -102,23 +114,26 @@ public class PanelEmpleado extends JPanel {
 		
 		JButton btnGuardarVigilante= new JButton("Guardar Vigilante");
 		btnGuardarVigilante.setBounds(130, 300, 170, 20);
+		btnGuardarVigilante.addActionListener(new ControladorPanelEmpleado(this));
 		panelmodificadorCrear.add(btnGuardarVigilante);
 		
 		JButton btnGuardarPersonalMantenimiento= new JButton("Guardar Personal Mant.");
 		btnGuardarPersonalMantenimiento.setBounds(130,330,170,20);
+		btnGuardarPersonalMantenimiento.addActionListener(new ControladorPanelEmpleado(this));
 		panelmodificadorCrear.add(btnGuardarPersonalMantenimiento);
 		
 		//
 		JButton btnBuscar = new JButton("Buscar Empleado");
-		btnBuscar.setBounds(460, 11, 140, 20);
+		btnBuscar.setBounds(630, 11, 140, 20);
+		btnBuscar.addActionListener(new ControladorPanelEmpleado(this));
 		add(btnBuscar);
 		
 		JLabel lbId = new JLabel("Id");
-		lbId.setBounds(360, 15, 23, 20);
+		lbId.setBounds(530, 15, 23, 20);
 		add(lbId);
 		
 		textId = new JTextField();
-		textId.setBounds(389, 12, 50, 20);
+		textId.setBounds(560, 12, 50, 20);
 		add(textId);
 		textId.setColumns(10);
 		
@@ -147,9 +162,24 @@ public class PanelEmpleado extends JPanel {
 		
 		JPanel panelmodificadorModificar = new JPanel();
 		panelmodificadorModificar.setBorder(new TitledBorder(null, "Modificar Empleado", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(220, 20, 60)));
-		panelmodificadorModificar.setBounds(330, 223, 450, 140);
+		panelmodificadorModificar.setBounds(330, 243, 450, 120);
 		add(panelmodificadorModificar);
 		panelmodificadorModificar.setLayout(null);
+		
+		JButton btnMostrarAuxAdmin= new JButton("Listar Aux");
+		btnMostrarAuxAdmin.setBounds(330,220,150,20);
+		btnMostrarAuxAdmin.addActionListener(new ControladorPanelEmpleado(this));
+		add(btnMostrarAuxAdmin);
+		
+		JButton btnMostrarVigilante= new JButton("Listar Vigilantes");
+		btnMostrarVigilante.setBounds(480,220,150,20);
+		btnMostrarVigilante.addActionListener(new ControladorPanelEmpleado(this));
+		add(btnMostrarVigilante);
+		
+		JButton btnMostrarPersonal= new JButton("Listar Personal M.");
+		btnMostrarPersonal.setBounds(630,220,150,20);
+		btnMostrarPersonal.addActionListener(new ControladorPanelEmpleado(this));
+		add(btnMostrarPersonal);
 		
 		
 	}

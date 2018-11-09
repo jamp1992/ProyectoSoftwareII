@@ -9,9 +9,18 @@ public abstract class ComponenteAptoPrototype <T extends ComponenteAptoPrototype
     private float largo;
     private float ancho;
     private int m2;
-    private Residente residente;
+    private String estado;
     
-    
+	public ComponenteAptoPrototype(int idAptoImpl) {
+		this.idAptoImpl = idAptoImpl;
+	}
+	
+	public ComponenteAptoPrototype(int idAptoImpl, String estado) {
+		this.idAptoImpl = idAptoImpl;
+		this.estado = estado;
+	}
+
+
 	public ComponenteAptoPrototype(int idAptoImpl, int numeroApto, float largo, float ancho, int m2) {
 		super();
 		this.idAptoImpl = idAptoImpl;
@@ -21,14 +30,14 @@ public abstract class ComponenteAptoPrototype <T extends ComponenteAptoPrototype
 		this.m2 = m2;
 	}
 	public ComponenteAptoPrototype(int idAptoImpl, String nombreApto, int numeroApto, float largo, float ancho, int m2,
-			double valor, Residente residente) {
+			double valor, String estado) {
 		this.idAptoImpl = idAptoImpl;
 		//this.nombreApto = nombreApto;
 		this.numeroApto = numeroApto;
 		this.largo = largo;
 		this.ancho = ancho;
 		this.m2 = m2;
-		this.residente=residente;
+		this.estado=estado;
 		//this.valor = valor;
 		
 	}
@@ -68,11 +77,11 @@ public abstract class ComponenteAptoPrototype <T extends ComponenteAptoPrototype
 	}
 	
 	
-	public Residente getResidente() {
-		return residente;
+	public String getEstado() {
+		return estado;
 	}
-	public void setResidente(Residente residente) {
-		this.residente = residente;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	public abstract T clone();
 	public abstract T deepClone();
@@ -83,5 +92,5 @@ public abstract class ComponenteAptoPrototype <T extends ComponenteAptoPrototype
 	public abstract float getAptoLargo();
 	public abstract float getAptoAncho();
 	public abstract int getMetro2();
-	public abstract Residente getRes();
+	public abstract String getEstate();
 }

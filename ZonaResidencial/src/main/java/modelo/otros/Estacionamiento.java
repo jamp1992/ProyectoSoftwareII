@@ -8,9 +8,23 @@ import modelo.persona.Residente;
 public class Estacionamiento {
 
 	private int idEstacionamiento;
-	private Residente residente;
+	private String estado;
 	
-    public Estacionamiento() {
+	
+    public Estacionamiento(int idEstacionamiento) {
+		this.idEstacionamiento = idEstacionamiento;
+	}
+
+	public Estacionamiento(int idEstacionamiento, String estado) {
+		this.idEstacionamiento = idEstacionamiento;
+		this.estado = estado;
+	}
+
+	public Estacionamiento(String estado) {
+		this.estado = estado;
+	}
+
+	public Estacionamiento() {
     }
 
     public int getIdEstacionamiento() {
@@ -20,14 +34,17 @@ public class Estacionamiento {
 	public void setIdEstacionamiento(int idEstacionamiento) {
 		this.idEstacionamiento = idEstacionamiento;
 	}
+	
 
-	public Residente getResidente() {
-		return residente;
+	public String getEstado() {
+		return estado;
 	}
 
-	public void setResidente(Residente residente) {
-		this.residente = residente;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
+
+	
 	
 
 	/**

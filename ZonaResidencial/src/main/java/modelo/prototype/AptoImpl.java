@@ -5,20 +5,27 @@ package modelo.prototype;
 import modelo.persona.Residente;
 
 public class AptoImpl extends ComponenteAptoPrototype{
-	
 	private String nombreApto;
 	private double valor;
 
 	public AptoImpl() {
-		super();
 	}
-
 	
+	
+	public AptoImpl(int idAptoImpl) {
+		super(idAptoImpl);
+	}
+	
+	
+
+	public AptoImpl(int idAptoImpl, String estado) {
+		super(idAptoImpl, estado);
+	}
 
 
 	public AptoImpl(int idAptoImpl, String nombreApto, int numeroApto, float largo, float ancho, int m2, double valor,
-			Residente residente) {
-		super(idAptoImpl, nombreApto, numeroApto, largo, ancho, m2, valor, residente);
+			String estado) {
+		super(idAptoImpl, nombreApto, numeroApto, largo, ancho, m2, valor, estado);
 		this.nombreApto=nombreApto;
 		this.valor=valor;
 	}
@@ -34,7 +41,7 @@ public class AptoImpl extends ComponenteAptoPrototype{
 
 	@Override
 	public ComponenteAptoPrototype clone() {
-		return new AptoImpl (this.getIdAptoImpl(),this.nombreApto,this.getNumeroApto(),this.getLargo(),this.getAncho(),this.getM2(), this.valor, this.getResidente());
+		return new AptoImpl (this.getIdAptoImpl(),this.nombreApto,this.getNumeroApto(),this.getLargo(),this.getAncho(),this.getM2(), this.valor, this.getEstado());
 	}
 
 	@Override
@@ -46,6 +53,7 @@ public class AptoImpl extends ComponenteAptoPrototype{
 		clone.setAncho(this.getAncho());
 		clone.setM2(this.getM2());
 		clone.setValor(this.valor);
+		clone.setEstado(this.getEstado());
 		return clone;
 	}
 
@@ -120,9 +128,9 @@ public class AptoImpl extends ComponenteAptoPrototype{
 
 
 	@Override
-	public Residente getRes() {
+	public String getEstate() {
 		// TODO Auto-generated method stub
-		return getResidente();
+		return getEstado();
 	}
 	
 	/*

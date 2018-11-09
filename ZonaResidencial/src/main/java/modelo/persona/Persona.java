@@ -14,6 +14,19 @@ public class Persona {
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
+	
+
+	public Persona(int cedula, String nombre) {
+		super();
+		this.cedula = cedula;
+		this.nombre = nombre;
+	}
+
+
+	public Persona() {
+		super();
+	}
+
 
 	public int getCedula() {
 		return cedula;

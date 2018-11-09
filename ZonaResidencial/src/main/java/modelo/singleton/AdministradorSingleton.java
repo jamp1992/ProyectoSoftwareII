@@ -1,13 +1,20 @@
   package modelo.singleton;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
+import modelo.builder.Torre;
 import modelo.factorymethod.AdmnistradorDAO;
 
 import modelo.factorymethod.EmpleadoDAO;
 import modelo.factorymethod.ResidenteDAO;
+import modelo.factorymethod.ServicioMantenimientoDAO;
 import modelo.otros.PagoAdmin;
 import modelo.otros.PagoServicioMantenimeinto;
+import modelo.otros.ServicioMantenimiento;
+import modelo.persona.Empleado;
 import modelo.persona.PersonaAcceso;
+import modelo.persona.Residente;
 
 
 public class AdministradorSingleton {
@@ -58,12 +65,65 @@ public class AdministradorSingleton {
         return empleado;
     }
 
-    /**
-     * @return
-     */
     public ResidenteDAO gestionarResidente() {
         ResidenteDAO residente = new ResidenteDAO();
         return residente;
+    }
+    public ServicioMantenimientoDAO gestionarServicioMantenimiento() {
+    	ServicioMantenimientoDAO servicioMantenimiento= new ServicioMantenimientoDAO();
+    	return servicioMantenimiento;
+    }
+    
+    public Torre buscarTorre(List<Torre> listaTorre, int idTorre) {
+    	
+    	Torre torre=null;
+    	for(int i=0;i<listaTorre.size();i++) {
+			if(listaTorre.get(i).getIdTorre()==idTorre)
+				torre=listaTorre.get(i);
+		}
+    	return torre;
+    	//JOptionPane.showMessageDialog(null, torre.getNombre());
+    	
+    }
+    
+    public Empleado buscarEmpleado(List<Empleado> listaAux, List<Empleado> listaVig, List<Empleado> listaPersMant , int idEmpleado) {
+    	Empleado e=null;
+    	List<Empleado> empleados= new ArrayList<>();
+    	for(Empleado empleado:listaAux) {
+    		empleados.add(empleado);
+    	}
+    	for(Empleado empleado:listaVig) {
+    		empleados.add(empleado);
+    	}
+    	for(Empleado empleado:listaPersMant) {
+    		empleados.add(empleado);
+    	}
+    	
+    	for(int i=0;i<empleados.size();i++) {
+			if(empleados.get(i).getCedula()==idEmpleado)
+				e=empleados.get(i);
+		}
+    	return e;
+    	//return "Todo bien";
+    	//JOptionPane.showMessageDialog(null, empleados.get(0).getNombre()+"  "+empleados.get(1).getNombre());
+    	
+    }
+    public Residente buscarResidente(List<Residente> listaRes, int idCedula) {
+    	Residente r=null;
+    	for(int i=0;i<listaRes.size();i++) {
+			if(listaRes.get(i).getCedula()==idCedula)
+				r=listaRes.get(i);
+		}
+    	return r;
+    }
+    
+    public int BuscarServicioMantenimiento(List<ServicioMantenimiento> servicioMantenimiento, String nombreServicio) {
+    	int idServicio=0;
+    	for(int i=0;i<servicioMantenimiento.size();i++) {
+			if(servicioMantenimiento.get(i).equals(nombre));
+				idServicio=servicioMantenimiento.get(i).getIdServicioMantenimiento();
+		}
+    	return idServicio;
     }
     
     public List<PagoAdmin> solicitarInformePagoAdmin() {
@@ -141,6 +201,17 @@ public class AdministradorSingleton {
 
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
+	}
+	
+	public boolean ingresarSistema(String usuario,String contrasena,String usuarioAdmin, String contrasenaAdmin) {
+		boolean estado=false;
+		if(usuarioAdmin==usuario && contrasenaAdmin==contrasena) {
+			estado=true;
+			
+		}
+			
+		return estado;
+			
 	}
     
 

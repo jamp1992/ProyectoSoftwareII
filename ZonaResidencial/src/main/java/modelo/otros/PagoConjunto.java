@@ -2,45 +2,53 @@ package modelo.otros;
 
 import java.util.*;
 
-/**
- * 
- */
 public class PagoConjunto {
-
-    /**
-     * Default constructor
-     */
+	
+	private int idPago;
+    private Date fechaPago;
+    private Double valorPago;
+    private boolean pagado;
+    
     public PagoConjunto() {
     }
+    
+    public PagoConjunto(Date fechaPago, Double valorPago) {
+		super();
+		this.fechaPago = fechaPago;
+		this.valorPago = valorPago;
+	}
+    
+    
+    
+	public PagoConjunto(Date fechaPago, Double valorPago, boolean pagado) {
+		super();
+		this.fechaPago = fechaPago;
+		this.valorPago = valorPago;
+		this.pagado = pagado;
+	}
 
-    /**
-     * 
-     */
-    private int idPago;
+	public PagoConjunto(int idPago, Date fechaPago, Double valorPago) {
+		super();
+		this.idPago = idPago;
+		this.fechaPago = fechaPago;
+		this.valorPago = valorPago;
+	}
+	
+	
 
-    /**
-     * 
-     */
-    private Date fechaPago;
+	public PagoConjunto(int idPago, Date fechaPago, Double valorPago, boolean pagado) {
+		super();
+		this.idPago = idPago;
+		this.fechaPago = fechaPago;
+		this.valorPago = valorPago;
+		this.pagado = pagado;
+	}
 
-    /**
-     * 
-     */
-    private Double valorPago;
-
-    /**
-     * @return
-     */
-    public void registrarPago() {
-        // TODO implement here
+	public void registrarPago() { 
         
     }
 
-    /**
-     * @return
-     */
     public void mostrarPago() {
-        // TODO implement here
         
     }
 
@@ -67,6 +75,17 @@ public class PagoConjunto {
 	public void setValorPago(Double valorPago) {
 		this.valorPago = valorPago;
 	}
+
+	public boolean isPagado() {
+		return pagado;
+	}
+
+	public void setPagado(boolean pagado) {
+		this.pagado = pagado;
+	}
+	
+	
+	
     
 
 }

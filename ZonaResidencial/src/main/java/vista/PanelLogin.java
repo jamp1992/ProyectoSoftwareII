@@ -9,6 +9,9 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
+
+import controlador.ControladorPanelLogin;
+
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -81,6 +84,7 @@ public class PanelLogin extends JFrame {
 		//Boton ingresar
 		JButton btnentrar = new JButton("Ingresar");       
 		btnentrar.setBounds(235, 110, 100, 23);
+		btnentrar.addActionListener(new ControladorPanelLogin(this));
 		contentPane.add(btnentrar);
 		
 	}

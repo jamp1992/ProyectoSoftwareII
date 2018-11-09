@@ -66,9 +66,9 @@ public class PisoEnchape extends AptoDecorator {
 	}
 
 	@Override
-	public Residente getRes() {
+	public String getEstate() {
 		// TODO Auto-generated method stub
-		return getComponenteAptoPrototype().getResidente();
+		return getComponenteAptoPrototype().getEstado();
 	}
 
 	

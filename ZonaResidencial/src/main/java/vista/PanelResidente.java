@@ -13,17 +13,21 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JDateChooser;
+
+import controlador.ControladorPanelEmpleado;
+import controlador.ControladorPanelResidente;
+
 public class PanelResidente extends JPanel{
 	public JTextField textCedula;
 	public JTextField textNombre;
 	public JTextField textApellido;
 	public JTextField textUsuario;
 	public JTextField textContrasena;
-	public JTextField textFechaAdquisicionApto;
-	public JTextField textFechaPagoAdmin;
 	public JTextField textValorAdmin;
 	public JTextField textIdEstacionamiento;
 	public JTextField textId;
+	public JTextField textIdApto;
 	public JScrollPane scroll;
     public Object[][] datos;
     public DefaultTableModel modeloTabla;
@@ -32,6 +36,13 @@ public class PanelResidente extends JPanel{
     public Object[][] datosEstacionamiento;
     public DefaultTableModel modeloTablaEstacionamiento;
     public JTable tableEstacionamiento;
+    public JScrollPane scrollApto;
+    public Object[][] datosApto;
+    public DefaultTableModel modeloTablaApto;
+    public JTable tableApto;
+    
+    public JDateChooser calendarioFechaAdquisicion;
+    public JDateChooser calendarioFechaPagoAdmin;
 	private static final long serialVersionUID = 1L;
 
 	public PanelResidente() {
@@ -40,7 +51,7 @@ public class PanelResidente extends JPanel{
 		
 		JPanel panelmodificadorCrear = new JPanel();
 		panelmodificadorCrear.setBorder(new TitledBorder(null, "Crear Residente", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(220, 20, 60)));
-		panelmodificadorCrear.setBounds(0, 0, 325, 365);
+		panelmodificadorCrear.setBounds(0, 0, 220, 365);
 		add(panelmodificadorCrear);
 		panelmodificadorCrear.setLayout(null);
 		
@@ -49,89 +60,118 @@ public class PanelResidente extends JPanel{
 		panelmodificadorCrear.add(btnCrearEmpleado);
 		
 		JLabel lblCedula= new JLabel("Cedula");
-		lblCedula.setBounds(100, 20, 100, 20);
+		lblCedula.setBounds(10, 50, 100, 20);
 		panelmodificadorCrear.add(lblCedula);
 		textCedula= new JTextField();
-		textCedula.setBounds(200, 20, 100, 20);
+		textCedula.setBounds(110, 50, 100, 20);
 		panelmodificadorCrear.add(textCedula);
 		
 		JLabel lblNombre= new JLabel("Nombre");
-		lblNombre.setBounds(100, 50, 100, 20);
+		lblNombre.setBounds(10, 80, 100, 20);
 		panelmodificadorCrear.add(lblNombre);
 		textNombre= new JTextField();
-		textNombre.setBounds(200, 50, 100, 20);
+		textNombre.setBounds(110, 80, 100, 20);
 		panelmodificadorCrear.add(textNombre);
 		
 		JLabel lblApellido= new JLabel("Apellido");
-		lblApellido.setBounds(100, 80, 100, 20);
+		lblApellido.setBounds(10, 110, 100, 20);
 		panelmodificadorCrear.add(lblApellido);
 		textApellido= new JTextField();
-		textApellido.setBounds(200, 80, 100, 20);
+		textApellido.setBounds(110, 110, 100, 20);
 		panelmodificadorCrear.add(textApellido);
 		
 		JLabel lblUsuario= new JLabel("Usuario");
-		lblUsuario.setBounds(100, 110, 100, 20);
+		lblUsuario.setBounds(10, 140, 100, 20);
 		panelmodificadorCrear.add(lblUsuario);
 		textUsuario= new JTextField();
-		textUsuario.setBounds(200, 110, 100, 20);
+		textUsuario.setBounds(110, 140, 100, 20);
 		panelmodificadorCrear.add(textUsuario);
 		
-		JLabel lblContrasena= new JLabel("Contraseña");
-		lblContrasena.setBounds(100, 140, 100, 20);
+		JLabel lblContrasena= new JLabel("Contraseï¿½a");
+		lblContrasena.setBounds(10, 170, 100, 20);
 		panelmodificadorCrear.add(lblContrasena);
 		textContrasena= new JTextField();
-		textContrasena.setBounds(200, 140, 100, 20);
+		textContrasena.setBounds(110, 170, 100, 20);
 		panelmodificadorCrear.add(textContrasena);
 		
 		JLabel lblFechaAdquisicionApto= new JLabel("Fecha adquisicion apto");
-		lblFechaAdquisicionApto.setBounds(100, 170, 100, 20);
+		lblFechaAdquisicionApto.setBounds(10, 200, 100, 20);
 		panelmodificadorCrear.add(lblFechaAdquisicionApto);
-		textFechaAdquisicionApto= new JTextField();
-		textFechaAdquisicionApto.setBounds(200, 170, 100, 20);
-		panelmodificadorCrear.add(textFechaAdquisicionApto);
+		calendarioFechaAdquisicion = new JDateChooser();
+		calendarioFechaAdquisicion.setBounds(110,200,100,20);
+		calendarioFechaAdquisicion.getJCalendar();
+		panelmodificadorCrear.add(calendarioFechaAdquisicion);
+		
 		
 		JLabel lblFechaPagoAdmin= new JLabel("Fecha pago admin");
-		lblFechaPagoAdmin.setBounds(100, 200, 100, 20);
+		lblFechaPagoAdmin.setBounds(10, 230, 100, 20);
 		panelmodificadorCrear.add(lblFechaPagoAdmin);
-		textFechaPagoAdmin= new JTextField();
-		textFechaPagoAdmin.setBounds(200, 200, 100, 20);
-		panelmodificadorCrear.add(textFechaPagoAdmin);
+		calendarioFechaPagoAdmin = new JDateChooser();
+		calendarioFechaPagoAdmin.setBounds(110,230,100,20);
+		calendarioFechaPagoAdmin.getJCalendar();
+		panelmodificadorCrear.add(calendarioFechaPagoAdmin);
+		
 		
 		JLabel lblValorAdmin= new JLabel("Valor Admin");
-		lblValorAdmin.setBounds(100, 230, 100, 20);
+		lblValorAdmin.setBounds(10, 260, 100, 20);
 		panelmodificadorCrear.add(lblValorAdmin);
 		textValorAdmin= new JTextField();
-		textValorAdmin.setBounds(200, 230, 100, 20);
+		textValorAdmin.setBounds(110, 260, 100, 20);
 		panelmodificadorCrear.add(textValorAdmin);
 		
 		JLabel lblIdEstacionamiento= new JLabel("Id Estacionamiento");
-		lblIdEstacionamiento.setBounds(100, 260, 100, 20);
+		lblIdEstacionamiento.setBounds(10, 290, 100, 20);
 		panelmodificadorCrear.add(lblIdEstacionamiento);
 		textIdEstacionamiento= new JTextField();
-		textIdEstacionamiento.setBounds(200, 260, 100, 20);
+		textIdEstacionamiento.setBounds(110, 290, 100, 20);
+		textIdEstacionamiento.setEnabled(false);
 		panelmodificadorCrear.add(textIdEstacionamiento);
 		
-		JButton btnGuardarResidente= new JButton("Registrar Residente");
-		btnGuardarResidente.setBounds(150, 330, 150, 20);
+		JLabel lblIdApto= new JLabel("Id Apto");
+		lblIdApto.setBounds(10, 320, 100, 20);
+		panelmodificadorCrear.add(lblIdApto);
+		textIdApto= new JTextField();
+		textIdApto.setBounds(110, 320, 100, 20);
+		textIdApto.setEnabled(false);
+		panelmodificadorCrear.add(textIdApto);
+		
+		JButton btnGuardarResidente= new JButton("Registrar");
+		btnGuardarResidente.setBounds(110, 20, 100, 20);
+		btnGuardarResidente.addActionListener(new ControladorPanelResidente(this));
 		panelmodificadorCrear.add(btnGuardarResidente);
+		
+		
 		//
 		JButton btnBuscar = new JButton("Buscar Residente");
-		btnBuscar.setBounds(460, 11, 140, 20);
+		btnBuscar.setBounds(330, 11, 140, 20);
+		btnBuscar.addActionListener(new ControladorPanelResidente(this));
 		add(btnBuscar);
 		
 		JLabel lbId = new JLabel("Id");
-		lbId.setBounds(360, 15, 23, 20);
+		lbId.setBounds(230, 15, 23, 20);
 		add(lbId);
 		
 		textId = new JTextField();
-		textId.setBounds(389, 12, 50, 20);
+		textId.setBounds(259, 12, 50, 20);
 		add(textId);
 		textId.setColumns(10);
 		
+		JButton btnMostrar = new JButton("Listar residente");
+		btnMostrar.setBounds(480, 11, 140, 20);
+		btnMostrar.addActionListener(new ControladorPanelResidente(this));
+		add(btnMostrar);
+		
+		JButton btnEliminar = new JButton("Eliminar residente");
+		btnEliminar.setBounds(630, 11, 140, 20);
+		btnEliminar.addActionListener(new ControladorPanelResidente(this));
+		add(btnEliminar);
+		
+		
+		//Tabla residentes
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(330, 45, 450, 170);
+		scrollPane.setBounds(225, 45, 555, 170);
 		add(scrollPane);
 		
                 table = new JTable();
@@ -140,7 +180,7 @@ public class PanelResidente extends JPanel{
 				{null, null, null, null, null, null,null,null,null},
 			},
 			new String[] {
-				"Cedula", "Nombre", "Apellido","Usuario","Contrasena","F.A. Apto","Propietario","F.P. Admin","Valor Admin"
+				"Cedula", "Nombre", "Apellido","Usuario","Contrasena","F.A. Apto","Propietario","F.P. Admin","Valor Admin","idEstacionamiento","idApto"
 			}
 		); 
 		table.setForeground(new Color(0, 0, 0));
@@ -153,18 +193,20 @@ public class PanelResidente extends JPanel{
 		
 		//Tabla estacionamiento
 		
-		JButton btnMostrarEstacionamiento = new JButton("Mostrar Todo");
-		btnMostrarEstacionamiento.setBounds(330, 233, 120, 20);
+		JButton btnMostrarEstacionamiento = new JButton("Listar Estacionamiento");
+		btnMostrarEstacionamiento.setBounds(225, 223, 150, 20);
+		btnMostrarEstacionamiento.addActionListener(new ControladorPanelResidente(this));
 		add(btnMostrarEstacionamiento);
 		
-		JButton btnMostrarEstacionamientoDisponible = new JButton("Mostrar Dispo.");
-		btnMostrarEstacionamientoDisponible.setBounds(452, 233, 120, 20);
-		add(btnMostrarEstacionamientoDisponible);
+		/*JButton btnMostrarEstacionamientoDisponible = new JButton("Mostrar Dispo.");
+		btnMostrarEstacionamientoDisponible.setBounds(342, 233, 120, 20);
+		btnMostrarEstacionamientoDisponible.addActionListener(new ControladorPanelResidente(this));
+		add(btnMostrarEstacionamientoDisponible);*/
 		
 		JScrollPane scrollPaneEstacionamiento = new JScrollPane();
 		scrollPaneEstacionamiento.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneEstacionamiento.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPaneEstacionamiento.setBounds(330, 263, 245, 100);
+		scrollPaneEstacionamiento.setBounds(225, 253, 150, 110);
 		add(scrollPaneEstacionamiento);
 		
                 tableEstacionamiento = new JTable();
@@ -183,16 +225,41 @@ public class PanelResidente extends JPanel{
 		tableEstacionamiento.getColumnModel().getColumn(0).setPreferredWidth(64);
 		tableEstacionamiento.getColumnModel().getColumn(1).setResizable(false);
 		scrollPaneEstacionamiento.setViewportView(tableEstacionamiento);
+		//textIdEstacionamiento.setText(String.valueOf(modeloTablaEstacionamiento.getValueAt(table.getSelectedRow(), 0)));
 		
+		//Tabla Aptos
+		JButton btnMostrarApto = new JButton("Listar Aptos");
+		btnMostrarApto.setBounds(385, 223, 150, 20);
+		btnMostrarApto.addActionListener(new ControladorPanelResidente(this));
+		add(btnMostrarApto);
 		
+		JScrollPane scrollPaneApto = new JScrollPane();
+		scrollPaneApto.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneApto.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPaneApto.setBounds(385, 253, 395, 110);
+		add(scrollPaneApto);
 		
-		JPanel panelmodificadorModificar = new JPanel();
-		panelmodificadorModificar.setBorder(new TitledBorder(null, "Modificar Residente", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(220, 20, 60)));
-		panelmodificadorModificar.setBounds(580, 223, 200, 140);
-		add(panelmodificadorModificar);
-		panelmodificadorModificar.setLayout(null);
+                tableApto = new JTable();
+                modeloTablaApto = new DefaultTableModel(
+                		new Object[][] {
+            				{null, null, null, null, null},
+            			},
+            			new String[] {
+            				"idApto", "Estado","# Apto","Valor","Descripcion"
+            			}
+		); 
+		tableApto.setForeground(new Color(0, 0, 0));
+		tableApto.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		tableApto.setBackground(new Color(255, 255, 0));
+		tableApto.setModel(modeloTablaApto);
+		tableApto.getColumnModel().getColumn(0).setPreferredWidth(64);
+		tableApto.getColumnModel().getColumn(1).setResizable(false);
+		scrollPaneApto.setViewportView(tableApto);
 		
-		
+		JButton btnSeleccionar = new JButton("Seleccionar Apto y Estacionamiento");
+		btnSeleccionar.setBounds(545, 223, 233, 20);
+		btnSeleccionar.addActionListener(new ControladorPanelResidente(this));
+		add(btnSeleccionar);
 		
 	}
 

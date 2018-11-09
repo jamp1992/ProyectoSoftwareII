@@ -104,6 +104,7 @@ public class EmpleadoDAO {
 			statement.setDate(6,new java.sql.Date(empleado.getFechaIngreso().getTime()));
 			statement.setInt(7, idConjuntoResidencial);
 			statement.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Registro Exitoso");
 			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -164,16 +165,18 @@ public class EmpleadoDAO {
     }
     
     //CRUD PersonalMantenimiento
-    public boolean crearPersonalMantenimiento(Empleado empleado, int idConjuntoResidencial) {
+    public boolean crearPersonalMantenimiento(Empleado empleado, int idConjuntoResidencial,int idServicioMantenimiento) {
     	Connection connection = dbAdapter.getConnection();
 		try {
-			PreparedStatement statement= connection.prepareStatement("INSERT INTO personalmantenimiento(cedula,"+"nombre, apellido, fechaIngreso, ConjuntoResidencial_idConjuntoResidencial) Values(?,?,?,?,?)");
+			PreparedStatement statement= connection.prepareStatement("INSERT INTO personalmantenimiento(cedula,"+"nombre, apellido, fechaIngreso, ConjuntoResidencial_idConjuntoResidencial, ServicioMantenimiento_idServicioMantenimiento) Values(?,?,?,?,?,?)");
 			statement.setInt(1,empleado.getCedula());
 			statement.setString(2,empleado.getNombre());
 			statement.setString(3, empleado.getApellido());
-			statement.setDate(6,new java.sql.Date(empleado.getFechaIngreso().getTime()));
+			statement.setDate(4,new java.sql.Date(empleado.getFechaIngreso().getTime()));
 			statement.setInt(5, idConjuntoResidencial);
+			statement.setInt(6, idServicioMantenimiento);
 			statement.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Registro Exitoso");
 			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -193,7 +196,7 @@ public class EmpleadoDAO {
 			PreparedStatement statement= connection.prepareStatement("SELECT cedula,nombre"+",apellido,fechaIngreso FROM PersonalMantenimiento");
 			ResultSet results = statement.executeQuery();
 			while(results.next()) {
-				EmpleadoList.add(new Empleado(results.getInt(1),results.getString(2), results.getString(3), null, null, results.getDate(6)));	
+				EmpleadoList.add(new Empleado(results.getInt(1),results.getString(2), results.getString(3), "No", "No", results.getDate(4)));	
 			}
 			return EmpleadoList;
 		}catch(Exception e){

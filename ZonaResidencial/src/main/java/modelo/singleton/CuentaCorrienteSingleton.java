@@ -2,53 +2,69 @@ package modelo.singleton;
 
 import java.util.*;
 
-/**
- * 
- */
+import modelo.factorymethod.CuentaCorrienteDAO;
+
 public class CuentaCorrienteSingleton {
+	
+	private static CuentaCorrienteSingleton singleton;
+    private int numeroCuenta;
+    private String nombreCuenta;
+    private Double saldo;
+    
+    private CuentaCorrienteSingleton() {
+    	CuentaCorrienteDAO CCDAO = new CuentaCorrienteDAO();
+    	CCDAO.ObtenerCuenta(this);
+    }
+    
+    private static synchronized void createInstance(){
+		if(singleton ==null){
+			singleton = new CuentaCorrienteSingleton();
+		}
+	}
 
-    /**
-     * Default constructor
-     */
-    public CuentaCorrienteSingleton() {
+    public static CuentaCorrienteSingleton getInstance() {
+    	if(singleton == null) {
+			createInstance();
+		}
+		return singleton;
     }
 
-    /**
-     * 
-     */
-    private CuentaCorrienteSingleton singleton;
+	public static CuentaCorrienteSingleton getSingleton() {
+		return singleton;
+	}
 
-    /**
-     * 
-     */
-    public int numeroCuenta;
+	public static void setSingleton(CuentaCorrienteSingleton singleton) {
+		CuentaCorrienteSingleton.singleton = singleton;
+	}
 
-    /**
-     * 
-     */
-    public String nombreCuenta;
+	public int getNumeroCuenta() {
+		return numeroCuenta;
+	}
 
-    /**
-     * 
-     */
-    public Double saldo;
+	public void setNumeroCuenta(int numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
 
+	public String getNombreCuenta() {
+		return nombreCuenta;
+	}
 
+	public void setNombreCuenta(String nombreCuenta) {
+		this.nombreCuenta = nombreCuenta;
+	}
 
-    /**
-     * @return
-     */
-    private void CuentaCorrienteSingleton() {
-        // TODO implement here
-      
-    }
+	public Double getSaldo() {
+		return saldo;
+	}
 
-    /**
-     * @return
-     */
-    public CuentaCorrienteSingleton getInstance() {
-        // TODO implement here
-        return null;
-    }
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+	public void sumarSaldo(Double saldo) {
+		this.saldo=this.saldo+saldo;
+	}
+    
+    
+
 
 }

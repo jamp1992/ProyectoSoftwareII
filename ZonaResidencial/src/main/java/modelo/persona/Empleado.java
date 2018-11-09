@@ -12,6 +12,13 @@ public class Empleado extends PersonaAcceso {
 		super(cedula, nombre, apellido, usuario, contrasena);
 		this.fechaIngreso=fechaIngreso;
 	}
+    
+    public Empleado() {
+		super();
+	}
+
+
+
 	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}

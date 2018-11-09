@@ -89,7 +89,7 @@ public class Torre {
 		}
 		public TorreBuilder addNivel(int idNivel, int cApto) {
 			int cont=100;
-			ComponenteAptoPrototype apto =new AptoImpl(1,"I",1,12,13,50,200000,null);
+			ComponenteAptoPrototype apto =new AptoImpl(1,"I",1,12,13,50,200000,"Disponible");
 			AptoPrototype.addPrototype(apto.getDescripcion(), apto);
 			for(int i=0;i<idNivel;i++) {
 				

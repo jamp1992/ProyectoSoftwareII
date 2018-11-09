@@ -53,7 +53,7 @@ public class InterfazAdministrador extends JFrame {
 		
 		JPanel paneltorre = new JPanel();
 		paneltorre.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Conjunto", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		tabbedPane.addTab("Gestionar Conjunto", null, paneltorre, null);
+		tabbedPane.addTab("Conjunto", null, paneltorre, null);
 		paneltorre.setLayout(new GridLayout(0, 1, 0, 0));
 		
 
@@ -66,7 +66,7 @@ public class InterfazAdministrador extends JFrame {
 		/**-------------------------------------panel    empleado**************************-*----------------------------------------------------------------------------------------------------------***********************/
 		JPanel panelempleado = new JPanel();
 		panelempleado.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Empleado", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		tabbedPane.addTab("Gestionar Empleado", null, panelempleado, null);
+		tabbedPane.addTab("Empleado", null, panelempleado, null);
 		panelempleado.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		/**   aqui se modifica el empleado  --------------------------------------llama---------------------------------------------------empleado-------------------------------------*/
@@ -77,7 +77,7 @@ public class InterfazAdministrador extends JFrame {
                 /**-------------------------------------panel    Residente**************************-*----------------------------------------------------------------------------------------------------------***********************/
 		JPanel panelresidente = new JPanel();
 		panelresidente.setBorder(new TitledBorder(null, "Residente", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
-		tabbedPane.addTab("Gestionar Residente", null, panelresidente, null);
+		tabbedPane.addTab("Residente", null, panelresidente, null);
 		panelresidente.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		/**   aqui se modifica el residente ---------------------------------------llama--------------------------------------------------residente-------------------------------------*/
@@ -88,14 +88,38 @@ public class InterfazAdministrador extends JFrame {
 		/**------------------------------------¨Panel    informe**************************-*----------------------------------------------------------------------------------------------------------***********************/
                 JPanel panelinforme = new JPanel();
                 panelinforme.setBorder(new TitledBorder(null, "Informe", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
-		tabbedPane.addTab("Gestionar Informe", null, panelinforme, null);
+		tabbedPane.addTab("Informe", null, panelinforme, null);
 		panelinforme.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		/**   aqui se modifica el informe  -------------------------------------llama----------------------------------------------------informe------------------------------------*/
 		PanelInforme informe=new PanelInforme();
 		panelinforme.add(informe).setVisible(true);
 		/** ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-		            
+		 
+		
+		/**------------------------------------¨Panel    Servicios mantenimiento**************************-*----------------------------------------------------------------------------------------------------------***********************/
+        JPanel panelServiciosMantenimiento = new JPanel();
+        panelServiciosMantenimiento.setBorder(new TitledBorder(null, "Servicios de mantenimiento", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		tabbedPane.addTab("Servicios mantenimiento", null, panelServiciosMantenimiento, null);
+		panelServiciosMantenimiento.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		/**   aqui se modifica el servicio de mantenimiento  -------------------------------------llama----------------------------------------------------informe------------------------------------*/
+		PanelServicioMantenimiento ServicioMantenimiento=new PanelServicioMantenimiento();
+		panelServiciosMantenimiento.add(ServicioMantenimiento).setVisible(true);
+		/** ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+		
+		/**------------------------------------¨Panel    Actividades**************************-*----------------------------------------------------------------------------------------------------------***********************/
+        JPanel panelNotificacion = new JPanel();
+        panelNotificacion.setBorder(new TitledBorder(null, "Actividades", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		tabbedPane.addTab("Actividades", null, panelNotificacion, null);
+		panelNotificacion.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		/**   aqui se modifica las actividades  -------------------------------------llama----------------------------------------------------informe------------------------------------*/
+		PanelActividades actividades=new PanelActividades();
+		panelNotificacion.add(actividades).setVisible(true);
+		/** ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+		
+		//tabbedPane.setEnabledAt(5, false);
 	}
 	
 }

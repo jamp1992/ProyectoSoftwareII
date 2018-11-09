@@ -7,10 +7,20 @@ import java.util.*;
  */
 public class PagoAdmin extends PagoConjunto {
 
-    /**
-     * Default constructor
-     */
-    public PagoAdmin() {
-    }
+	public PagoAdmin() {
+		super();
+	}
 
+	public PagoAdmin(Date fechaPago, Double valorPago) {
+		super(fechaPago, valorPago);
+	}
+
+	public PagoAdmin(int idPago, Date fechaPago, Double valorPago) {
+		super(idPago, fechaPago, valorPago);
+	}
+
+	public PagoAdmin(int idPago, Date fechaPago, Double valorPago, boolean pagado) {
+		super(idPago, fechaPago, valorPago, pagado);
+	}
+	
 }

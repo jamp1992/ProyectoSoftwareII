@@ -8,4 +8,10 @@ public class PersonalMantenimiento extends Persona {
 		super(cedula, nombre, apellido);
 	}
 
+	public PersonalMantenimiento() {
+		super();
+	}
+	
+	
+
 }

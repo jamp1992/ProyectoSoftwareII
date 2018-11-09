@@ -14,6 +14,19 @@ public class PersonaAcceso extends Persona {
 		this.contrasena = contrasena;
 	}
 
+	
+
+	public PersonaAcceso(int cedula, String nombre) {
+		super(cedula, nombre);
+		// TODO Auto-generated constructor stub
+	}
+	
+
+	public PersonaAcceso() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 
 	public void ingresarSistema() {

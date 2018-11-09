@@ -14,15 +14,19 @@ import javax.swing.JOptionPane;
 import modelo.builder.Nivel;
 import modelo.builder.Torre;
 import modelo.factorymethod.AptoDAO;
+import modelo.factorymethod.EstacionamientoDAO;
 import modelo.factorymethod.NivelDAO;
 import modelo.factorymethod.TorreDAO;
+import modelo.otros.Estacionamiento;
 import modelo.prototype.AptoImpl;
+import modelo.singleton.AdministradorSingleton;
 import modelo.singleton.ConjuntoResidencialSingleton;
 import vista.PanelTorre;
 
 public class ControladorPanelTorre implements ActionListener {
 	
 	private PanelTorre pt;
+	private AdministradorSingleton admin=AdministradorSingleton.getInstance();
 	public ControladorPanelTorre(PanelTorre pt) {
 		this.pt = pt;
 	}
@@ -58,12 +62,16 @@ public class ControladorPanelTorre implements ActionListener {
 				List<Torre> torreList=TDAO.finAllTorres();
 				NivelDAO NDAO = new NivelDAO();
 				AptoDAO ADAO= new AptoDAO();
+				EstacionamientoDAO EDAO= new EstacionamientoDAO();
 				//El primer for leera los niveles que tiene la torre creada, luego los almacena en la BD.
 				//El segundo for almacenara a la BD los aptos por cada nivel.
 				for(int i=0;i<torre.getNivel().size(); i++) {
 					NDAO.saveNivel(torre.getNivel().get(i) , torreList.get(torreList.size()-1).getIdTorre());
 					for(int j=0;j<torre.getNivel().get(i).getApto().size();j++) {
 						ADAO.saveApto(torre.getNivel().get(i).getApto().get(j), NDAO.finAllNiveles().get(NDAO.finAllNiveles().size()-1).getIdPiso());
+						//Por cada apto almacenado, se guardara un estacionamiento
+						Estacionamiento estacionamiento= new Estacionamiento("Disponible");
+						EDAO.saveEstacionamiento(estacionamiento);
 					}
 				}
 				pt.textNumeroPisos.setText("");
@@ -100,10 +108,27 @@ public class ControladorPanelTorre implements ActionListener {
 				Iterator<AptoImpl> itrApto = listaApto.iterator();
                 while(itrApto.hasNext()){
                     a=(AptoImpl) itrApto.next();
-                    this.pt.modeloTablaApto.addRow(new Object[]{a.getIdAptoImpl(),null,a.getNumeroApto(),a.getValor(),a.getNombreApto(),a.getLargo(),a.getAncho(),a.getM2()});
+                    this.pt.modeloTablaApto.addRow(new Object[]{a.getIdAptoImpl(),a.getEstado(),a.getNumeroApto(),a.getValor(),a.getNombreApto(),a.getLargo(),a.getAncho(),a.getM2()});
                 }
-				
+                
+			case"Buscar Torre":
+				TorreDAO tdao= new TorreDAO();
+				Torre torreBusqueda = new Torre();
+				torreBusqueda=admin.buscarTorre(tdao.finAllTorres(), Integer.parseInt(pt.textid.getText()));
+				//JOptionPane.showMessageDialog(null, admin.buscarTorre(tdao.finAllTorres(), Integer.parseInt(pt.textid.getText())).getNombre());
+					if(torreBusqueda==null) {
+						JOptionPane.showMessageDialog(null, "Id no existe");
+					}	
+						else{
+							for(int i=this.pt.modeloTabla.getRowCount(); i>0; i--){
+			                    this.pt.modeloTabla.removeRow(i-1);
+			                }
+							this.pt.modeloTabla.addRow(new Object[]{torreBusqueda.getIdTorre(),torreBusqueda.getNombre(),torreBusqueda.getPosicionX(),torreBusqueda.getPosicionY()});
+						}
+					
 				break;
+				
+				
 		}
 		
 	}

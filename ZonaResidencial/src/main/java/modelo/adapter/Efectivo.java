@@ -1,24 +1,42 @@
 package modelo.adapter;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-/**
- * 
- */
-public class Efectivo implements IMetodoPagoAdapter {
+import javax.swing.JOptionPane;
 
-    /**
-     * Default constructor
-     */
-    public Efectivo() {
-    }
+import modelo.otros.DatosPagoDTO;
+import modelo.otros.PagoAdmin;
+import modelo.persona.Residente;
+import modelo.singleton.CuentaCorrienteSingleton;
+
+public class Efectivo extends IMetodoPagoAdapter {
+	
+	List<Object> listaPrincipal = new ArrayList<Object>();
+	List<Residente> listaResidente = new ArrayList<>();
+	List<PagoAdmin> listaPago=new ArrayList<>();
+	
+    public Efectivo(double cantidad, Date fechaPago) {
+		super(cantidad, fechaPago);
+	}
+    
+	public Efectivo(DatosPagoDTO datosPago, Residente residente) {
+		super(datosPago, residente);
+		listaPrincipal.add(listaResidente);
+		listaPrincipal.add(listaPago);
+		
+	}
 
 
-    /**
-     * @return
-     */
-    public void pagar() {
-        // TODO implement here
-        
-    }
+
+	@Override
+	public boolean pagar() {
+		/*CuentaCorrienteSingleton CC1=CuentaCorrienteSingleton.getInstance();
+		CC1.sumarSaldo(this.getDatosPago().getPago());*/
+		return true;
+	}
+
+	
 
 }
