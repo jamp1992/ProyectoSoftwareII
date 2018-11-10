@@ -120,6 +120,15 @@ public class InterfazAdministrador extends JFrame {
 		/** ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 		
 		//tabbedPane.setEnabledAt(5, false);
+		
+		JPanel panelControl = new JPanel();
+        panelControl.setBorder(new TitledBorder(null, "Control y Acceso", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		tabbedPane.addTab("Control yAcceso", null, panelControl, null);
+		panelControl.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		PanelAcceso acceso =new PanelAcceso();
+		panelControl.add(acceso).setVisible(true);
+		
 	}
 	
 }
