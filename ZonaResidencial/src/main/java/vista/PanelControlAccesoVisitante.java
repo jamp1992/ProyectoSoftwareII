@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
-public class PanelAsignacion_Parqueadero extends JPanel {
+public class PanelControlAccesoVisitante extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JTextField textCedula;
@@ -26,14 +26,14 @@ public class PanelAsignacion_Parqueadero extends JPanel {
 	public DefaultTableModel modeloTabla;
 	public JTable table;
 	 public JDateChooser Fecha_Entrada;
-	public PanelAsignacion_Parqueadero() {
+	public PanelControlAccesoVisitante() {
 
 		setBorder(null);
 		setLayout(null);
 
-		JButton btnBuscarParqueaderosDisponibles = new JButton("Buscar Parquederos Disponibles");
-		btnBuscarParqueaderosDisponibles.setBounds(50, 11, 280, 23);
-		add(btnBuscarParqueaderosDisponibles);
+		JButton btnMostrarVisitantesRegistrados = new JButton("Mostrar Visitantes");
+		btnMostrarVisitantesRegistrados.setBounds(50, 11, 280, 23);
+		add(btnMostrarVisitantesRegistrados);
 		
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -43,22 +43,27 @@ public class PanelAsignacion_Parqueadero extends JPanel {
 		add(scrollPane);
 
 		table = new JTable();
-		modeloTabla = new DefaultTableModel(new Object[][] { { null, null }, },
-				new String[] { "ID_PARQUEADERO", "ESTADO" });
+		modeloTabla = new DefaultTableModel(new Object[][] { { null, null, null, null }, },
+				new String[] { "Cedula", "Nombre", "Apellido", "Fecha Entrada" });
 
 		table.setForeground(new Color(0, 0, 0));
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setBackground(new Color(255, 255, 0));
 		table.setModel(modeloTabla);
 		table.getColumnModel().getColumn(0).setPreferredWidth(64);
-		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setResizable(false);
 		scrollPane.setViewportView(table);
 		
 		
 		
 		JLabel lblDatos= new JLabel("*** DATOS VISITANTE ***");
-		lblDatos.setBounds(530, 11, 280, 20);
+		lblDatos.setBounds(560, 11, 280, 20);
 		add(lblDatos);
+		
+		
+		JButton btnCrear= new JButton("CREAR");
+		btnCrear.setBounds(530, 41, 200, 20);
+		add(btnCrear);
 		
 		JLabel lblCedula= new JLabel("Cedula");
 		lblCedula.setBounds(480, 80, 280, 20);

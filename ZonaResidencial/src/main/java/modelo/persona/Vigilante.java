@@ -4,6 +4,7 @@ package modelo.persona;
 
 import java.sql.Date;
 
+import modelo.factorymethod.VisitanteDAO;
 import modelo.otros.Estacionamiento;
 
 /**
@@ -17,9 +18,16 @@ public class Vigilante extends Empleado {
 		super(cedula, nombre, apellido, usuario, contrasena, fechaIngreso);
 	}
 
-	public void controlarAccesoVisitante(Visitante visitante) {
-        // TODO implement here
-    }
+    
+    
+    public VisitanteDAO controlAccesoVisitante () {
+		VisitanteDAO visitante = new VisitanteDAO();
+		return visitante;
+	}
+	
+	//public void controlarAccesoVisitante(Visitante visitante) {
+       
+//   }
 
     /**
      * @param Residente 
@@ -44,8 +52,10 @@ public class Vigilante extends Empleado {
      * @param Estacionamiento 
      * @return
      */
-    public void asignarParqueaderoVisitante(Visitante visitante, Estacionamiento estacionamiento) {
-        // TODO implement here
+    public Visitante asignarParqueaderoVisitante(int cedula,String nombre, String apellido, Date fecha) {
+    	
+        Visitante visitante=new Visitante(cedula,nombre,apellido,fecha);
+        return visitante;
         
     }
 

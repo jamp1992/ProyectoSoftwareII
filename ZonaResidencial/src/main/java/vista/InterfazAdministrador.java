@@ -134,7 +134,7 @@ public class InterfazAdministrador extends JFrame {
 		tabbedPane.addTab("Control de Visitantes", null, panelAsignacion, null);
 		panelAsignacion.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		PanelAsignacion_Parqueadero asignacion =new PanelAsignacion_Parqueadero();
+		PanelControlAccesoVisitante asignacion =new PanelControlAccesoVisitante();
 		panelAsignacion.add(asignacion).setVisible(true);
 		
 		
