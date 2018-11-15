@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import modelo.factorymethod.VisitanteDAO;
 import modelo.persona.Empleado;
 import modelo.persona.Vigilante;
@@ -79,7 +82,13 @@ public class ControladorPanelVigilante implements ActionListener {
                 visitante=(Visitante) itrVig.next();
                 this.accesoVisitante.modeloTabla.addRow(new Object[]{visitante.getCedula(),visitante.getNombre(),visitante.getApellido(),visitante.getFechaEntrada()});
             }
+            break;
+		case "ELIMINAR VISITANTE":
+			VDAO.EliminarVisitante(Integer.parseInt(String.valueOf(this.accesoVisitante.modeloTabla.getValueAt(this.accesoVisitante.table.getSelectedRow(), 0))));
+            break;
+            
 		}
+		
 		
 		
 

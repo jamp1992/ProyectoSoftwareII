@@ -119,6 +119,7 @@ public class PanelControlAccesoVisitante extends JPanel {
 		
 		JButton btnEliminarEntrada = new JButton("ELIMINAR VISITANTE");
 		btnEliminarEntrada.setBounds(550, 310, 200, 23);
+		btnEliminarEntrada.addActionListener(new ControladorPanelVigilante(this));
 		add(btnEliminarEntrada);
 
 	}

@@ -117,6 +117,7 @@ public class PanelResidente extends JPanel{
 		panelmodificadorCrear.add(lblValorAdmin);
 		textValorAdmin= new JTextField();
 		textValorAdmin.setBounds(110, 260, 100, 20);
+		textValorAdmin.setEnabled(false);
 		panelmodificadorCrear.add(textValorAdmin);
 		
 		JLabel lblIdEstacionamiento= new JLabel("Id Estacionamiento");

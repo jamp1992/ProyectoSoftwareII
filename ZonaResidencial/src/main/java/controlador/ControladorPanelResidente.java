@@ -148,7 +148,7 @@ public class ControladorPanelResidente implements ActionListener {
 		case"Seleccionar Apto y Estacionamiento":
 			pr.textIdEstacionamiento.setText(String.valueOf(this.pr.modeloTablaEstacionamiento.getValueAt(this.pr.tableEstacionamiento.getSelectedRow(), 0)));
 			pr.textIdApto.setText(String.valueOf(this.pr.modeloTablaApto.getValueAt(this.pr.tableApto.getSelectedRow(), 0)));
-			
+			pr.textValorAdmin.setText(String.valueOf(this.pr.modeloTablaApto.getValueAt(this.pr.tableApto.getSelectedRow(), 3)));
 			break;
 		
 			

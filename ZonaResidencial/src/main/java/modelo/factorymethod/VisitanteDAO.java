@@ -73,6 +73,8 @@ public class VisitanteDAO {
 		    	try {
 					@SuppressWarnings("unused")
 					PreparedStatement statement=connection.prepareStatement("DELETE FROM Visitante WHERE cedula='"+cedula+"'");
+					statement.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Registro eliminado");
 					return true;
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
