@@ -19,7 +19,7 @@ public class InterfazAdministrador extends JFrame {
 	public JTabbedPane tabbedPane;
 	public JPanel panelNotificacion;
 	private static final long serialVersionUID = 1L;
-	
+	/*
        public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			
@@ -34,7 +34,7 @@ public class InterfazAdministrador extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 	
 	public InterfazAdministrador() {
 		

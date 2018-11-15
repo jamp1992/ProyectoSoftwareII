@@ -18,7 +18,7 @@ import javax.swing.border.EtchedBorder;
 public class InterfazCliente extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	
+	/*
     public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			
@@ -33,7 +33,7 @@ public class InterfazCliente extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 	
     
     public InterfazCliente () {

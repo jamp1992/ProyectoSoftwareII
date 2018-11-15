@@ -39,7 +39,7 @@ public class ControladorPanelLogin implements ActionListener{
 					InterfazAdministrador frame = new InterfazAdministrador();
 					frame.tabbedPane.setEnabledAt(5, false);
 					frame.tabbedPane.setEnabledAt(6, false);
-					frame.tabbedPane.setEnabledAt(7, false);
+			
 					frame.tabbedPane.setSelectedIndex(0);
 					frame.setVisible(true);
 					this.pl.dispose();
@@ -58,7 +58,6 @@ public class ControladorPanelLogin implements ActionListener{
 					frame.tabbedPane.setEnabledAt(3, false);
 					frame.tabbedPane.setEnabledAt(4, false);
 					frame.tabbedPane.setEnabledAt(6, false);
-					frame.tabbedPane.setEnabledAt(7, false);
 					frame.tabbedPane.setSelectedIndex(5);
 					frame.setVisible(true);
 					this.pl.dispose();
