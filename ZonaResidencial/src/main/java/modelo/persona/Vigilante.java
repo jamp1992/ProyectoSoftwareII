@@ -25,11 +25,10 @@ public class Vigilante extends Empleado {
 	}
 
 
-<<<<<<< HEAD
 	public void controlarAccesoVisitante(Visitante visitante) {
        
     }
-=======
+
     
     
     public VisitanteDAO controlAccesoVisitante () {
@@ -40,16 +39,14 @@ public class Vigilante extends Empleado {
 	//public void controlarAccesoVisitante(Visitante visitante) {
        
 //   }
->>>>>>> branch 'master' of https://github.com/jamp1992/ProyectoSoftwareII.git
+
 
     public void controlarAccesoResidente(Residente residente) {
       
     }
 
     public void asignarParqueaderoResidente(Residente residente, Estacionamiento estacionamiento) {
-<<<<<<< HEAD
-=======
-        // TODO implement here
+
     }
 
     /**
@@ -61,7 +58,6 @@ public class Vigilante extends Empleado {
     	
         Visitante visitante=new Visitante(cedula,nombre,apellido,fecha);
         return visitante;
->>>>>>> branch 'master' of https://github.com/jamp1992/ProyectoSoftwareII.git
         
     }
     public void asignarParqueaderoVisitante(Visitante visitante, Estacionamiento estacionamiento) {
