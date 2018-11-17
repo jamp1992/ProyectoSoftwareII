@@ -2,7 +2,7 @@ package modelo.persona;
 
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import modelo.factorymethod.VisitanteDAO;
@@ -54,7 +54,7 @@ public class Vigilante extends Empleado {
      * @param Estacionamiento 
      * @return
      */
-    public Visitante asignarParqueaderoVisitante(int cedula,String nombre, String apellido, Date fecha) {
+    public Visitante controlarAccesoVisitante(int cedula,String nombre, String apellido, Date fecha) {
     	
         Visitante visitante=new Visitante(cedula,nombre,apellido,fecha);
         return visitante;

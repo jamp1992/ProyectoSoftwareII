@@ -27,7 +27,7 @@ public class VisitanteDAO {
 		Connection connection = dbAdapter.getConnection();
 		try {
 			
-			PreparedStatement statement= connection.prepareStatement("INSERT INTO Visitante(cedula,"+"nombre, apellido,fechaIngreso, ConjuntoResidencial_idConjuntoResidencial) Values(?,?,?,?,?)");
+			PreparedStatement statement= connection.prepareStatement("INSERT INTO Visitante(cedula,"+"nombre, apellido,fechaEntrada, ConjuntoResidencial_idConjuntoResidencial) Values(?,?,?,?,?)");
 			statement.setInt(1,visitante.getCedula());
 			statement.setString(2,visitante.getNombre());
 			statement.setString(3, visitante.getApellido());
@@ -51,7 +51,7 @@ public class VisitanteDAO {
 				Connection connection = dbAdapter.getConnection();
 				List<Visitante> VisitanteList = new ArrayList<>();
 				try {
-					PreparedStatement statement= connection.prepareStatement("SELECT cedula,nombre"+",apellido, fechaIngreso FROM Visitante");
+					PreparedStatement statement= connection.prepareStatement("SELECT cedula,nombre"+",apellido, fechaEntrada FROM Visitante");
 					ResultSet results = statement.executeQuery();
 					while(results.next()) {
 						VisitanteList.add(new Visitante(results.getInt(1),results.getString(2), results.getString(3),results.getDate(4)));	

@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
+import controlador.ControladorPanelVigilante;
+
 public class PanelControlAccesoVisitante extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -33,6 +35,7 @@ public class PanelControlAccesoVisitante extends JPanel {
 
 		JButton btnMostrarVisitantesRegistrados = new JButton("Mostrar Visitantes");
 		btnMostrarVisitantesRegistrados.setBounds(50, 11, 280, 23);
+		btnMostrarVisitantesRegistrados.addActionListener(new ControladorPanelVigilante(this));
 		add(btnMostrarVisitantesRegistrados);
 		
 		
@@ -61,8 +64,9 @@ public class PanelControlAccesoVisitante extends JPanel {
 		add(lblDatos);
 		
 		
-		JButton btnCrear= new JButton("CREAR");
+		JButton btnCrear= new JButton("Crear");
 		btnCrear.setBounds(530, 41, 200, 20);
+		btnCrear.addActionListener(new ControladorPanelVigilante(this));
 		add(btnCrear);
 		
 		JLabel lblCedula= new JLabel("Cedula");
@@ -71,6 +75,7 @@ public class PanelControlAccesoVisitante extends JPanel {
 		
 		textCedula = new JTextField ();
 		textCedula.setBounds(580, 80, 200, 20);
+		textCedula.setEnabled(false);
 		add(textCedula);
 		
 		
@@ -80,6 +85,7 @@ public class PanelControlAccesoVisitante extends JPanel {
 		
 		textNombre = new JTextField ();
 		textNombre.setBounds(580, 110, 200, 20);
+		textNombre.setEnabled(false);
 		add(textNombre);
 		
 		JLabel lblApellido= new JLabel("Apellido");
@@ -88,6 +94,7 @@ public class PanelControlAccesoVisitante extends JPanel {
 		
 		textApellido = new JTextField ();
 		textApellido.setBounds(580, 140, 200, 20);
+		textApellido.setEnabled(false);
 		add(textApellido);
 		
 		
@@ -103,6 +110,7 @@ public class PanelControlAccesoVisitante extends JPanel {
 		
 		JButton btnRegistarEntrada = new JButton("REGISTRAR VISITANTE");
 		btnRegistarEntrada.setBounds(550, 250, 200, 23);
+		btnRegistarEntrada.addActionListener(new ControladorPanelVigilante(this));
 		add(btnRegistarEntrada);
 		
 		JButton btnModificarEntrada = new JButton("MODIFICAR VISITANTE");
