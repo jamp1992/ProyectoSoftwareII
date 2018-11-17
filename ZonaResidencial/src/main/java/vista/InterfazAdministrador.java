@@ -16,9 +16,8 @@ import javax.swing.border.EtchedBorder;
 
 
 public class InterfazAdministrador extends JFrame {
-	/**
-	 * 
-	 */
+	public JTabbedPane tabbedPane;
+	public JPanel panelNotificacion;
 	private static final long serialVersionUID = 1L;
 	
        public static void main(String[] args) {
@@ -45,7 +44,7 @@ public class InterfazAdministrador extends JFrame {
 		setBounds(100, 100, 817, 463);
                 getContentPane().setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 801, 424);
                 getContentPane().add(tabbedPane);
 		
@@ -109,7 +108,7 @@ public class InterfazAdministrador extends JFrame {
 		/** ---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 		
 		/**------------------------------------¨Panel    Actividades**************************-*----------------------------------------------------------------------------------------------------------***********************/
-        JPanel panelNotificacion = new JPanel();
+        panelNotificacion = new JPanel();
         panelNotificacion.setBorder(new TitledBorder(null, "Actividades", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
 		tabbedPane.addTab("Actividades", null, panelNotificacion, null);
 		panelNotificacion.setLayout(new GridLayout(1, 0, 0, 0));

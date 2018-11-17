@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+import controlador.ControladorPanelInforme;
+
 public class PanelInforme extends JPanel{
 	private static final long serialVersionUID = 1L;
 	public JScrollPane scroll;
@@ -60,6 +62,7 @@ public class PanelInforme extends JPanel{
 		
 		JButton ButtonGenerarReporte= new JButton("Generar Reporte");
 		ButtonGenerarReporte.setBounds(620, 50, 150, 20);
+		ButtonGenerarReporte.addActionListener(new ControladorPanelInforme(this));
 		add(ButtonGenerarReporte);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -71,10 +74,10 @@ public class PanelInforme extends JPanel{
                 table = new JTable();
                 modeloTabla = new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null},
+				{null, null, null, null, null, null,null},
 			},
 			new String[] {
-				"Nombre", "Identificacion", "Torre","Apartamento","Valor","Fecha"
+				"Nombre", "Identificacion", "Torre","Apartamento","Valor","FechaPagoAdmin","Pagado"
 			}
 		); 
 		table.setForeground(new Color(0, 0, 0));

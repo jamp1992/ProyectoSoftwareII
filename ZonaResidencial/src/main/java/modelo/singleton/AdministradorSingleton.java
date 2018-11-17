@@ -3,6 +3,7 @@ import java.util.*;
 
 import javax.swing.JOptionPane;
 
+import modelo.builder.Nivel;
 import modelo.builder.Torre;
 import modelo.factorymethod.AdmnistradorDAO;
 
@@ -15,6 +16,7 @@ import modelo.otros.ServicioMantenimiento;
 import modelo.persona.Empleado;
 import modelo.persona.PersonaAcceso;
 import modelo.persona.Residente;
+import modelo.prototype.AptoImpl;
 
 
 public class AdministradorSingleton {
@@ -125,7 +127,12 @@ public class AdministradorSingleton {
     }
     
     public List<PagoAdmin> solicitarInformePagoAdmin() {
-        // TODO implement here
+       // List<List<Torre>,List<AptoImpl>, List<Residente>,List<PagoAdmin>> listaDatos= new ArrayList<>();
+    	List<String> listaObjetos= new ArrayList<>();
+    	listaObjetos.add("Ole");
+    	listaObjetos.add("MK");
+    	
+    	JOptionPane.showMessageDialog(null, listaObjetos.get(0));
         return null;
     }
 

@@ -46,14 +46,13 @@ public class AuxAdministrativo extends Empleado {
 		return notificacion;
 		}
 	}
-	public void cobrarAdmin(List<Residente> residente) {
+	public void cobrarAdmin(List<Residente> residente, PagoConjuntoDAO PCDAO) {
 		
 		Calendar calendarActual = Calendar.getInstance();
 		Calendar calendar = Calendar.getInstance();
 		Date fecha= new Date();
 		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
 		sdf.format(fecha);
-		PagoConjuntoDAO PCDAO= new PagoConjuntoDAO();
 		List<Residente> listaResidente= new ArrayList<>();
 		List<PagoAdmin> listaPagoAdmin=new ArrayList<>();
 		listaResidente=residente;

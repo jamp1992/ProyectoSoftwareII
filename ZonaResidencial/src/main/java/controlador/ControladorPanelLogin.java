@@ -9,6 +9,7 @@ import modelo.persona.AuxAdministrativo;
 import modelo.persona.Residente;
 import modelo.persona.Vigilante;
 import modelo.factorymethod.NotificacionDAO;
+import modelo.factorymethod.PagoConjuntoDAO;
 import modelo.singleton.AdministradorSingleton;
 import vista.InterfazAdministrador;
 import vista.InterfazCliente;
@@ -22,6 +23,7 @@ public class ControladorPanelLogin implements ActionListener{
 	private AuxAdministrativo auxAdmin=new AuxAdministrativo();
 	private Vigilante vigilante=new Vigilante();
 	private Residente residente= new Residente();
+	private PagoConjuntoDAO PCDAO=new PagoConjuntoDAO();
 	
 	public ControladorPanelLogin(PanelLogin pl) {
 		this.pl = pl;
@@ -35,6 +37,10 @@ public class ControladorPanelLogin implements ActionListener{
 			if(pl.rol.getSelectedItem().toString()=="Administrador") {
 				if(admin.ingresarSistema(pl.textusuario.getText(), pl.pwcontrasena.getText(),admin.getUsuario(),admin.getContrasena())==true){
 					InterfazAdministrador frame = new InterfazAdministrador();
+					frame.tabbedPane.setEnabledAt(5, false);
+					frame.tabbedPane.setEnabledAt(6, false);
+					frame.tabbedPane.setEnabledAt(7, false);
+					frame.tabbedPane.setSelectedIndex(0);
 					frame.setVisible(true);
 					this.pl.dispose();
 				}
@@ -44,8 +50,16 @@ public class ControladorPanelLogin implements ActionListener{
 			}
 			else if(pl.rol.getSelectedItem().toString()=="AuxAdministrador") {
 				if(auxAdmin.ingresarSistema(pl.textusuario.getText(), pl.pwcontrasena.getText(), admin.gestionarEmpleado().MostrarAuxiliaresAdmin())==true){
-					auxAdmin.cobrarAdmin(admin.gestionarResidente().MostrarResidentes());
+					auxAdmin.cobrarAdmin(admin.gestionarResidente().MostrarResidentes(),PCDAO);
 					InterfazAdministrador frame = new InterfazAdministrador();
+					frame.tabbedPane.setEnabledAt(0, false);
+					frame.tabbedPane.setEnabledAt(1, false);
+					frame.tabbedPane.setEnabledAt(2, false);
+					frame.tabbedPane.setEnabledAt(3, false);
+					frame.tabbedPane.setEnabledAt(4, false);
+					frame.tabbedPane.setEnabledAt(6, false);
+					frame.tabbedPane.setEnabledAt(7, false);
+					frame.tabbedPane.setSelectedIndex(5);
 					frame.setVisible(true);
 					this.pl.dispose();
 				}
@@ -56,6 +70,13 @@ public class ControladorPanelLogin implements ActionListener{
 			else if(pl.rol.getSelectedItem().toString()=="Vigilante") {
 				if(vigilante.ingresarSistema(pl.textusuario.getText(), pl.pwcontrasena.getText(), admin.gestionarEmpleado().MostrarVigilantes())==true);
 				InterfazAdministrador frame = new InterfazAdministrador();
+				frame.tabbedPane.setEnabledAt(0, false);
+				frame.tabbedPane.setEnabledAt(1, false);
+				frame.tabbedPane.setEnabledAt(2, false);
+				frame.tabbedPane.setEnabledAt(3, false);
+				frame.tabbedPane.setEnabledAt(4, false);
+				frame.tabbedPane.setEnabledAt(5, false);
+				frame.tabbedPane.setSelectedIndex(6);
 				frame.setVisible(true);
 				this.pl.dispose();
 			}
