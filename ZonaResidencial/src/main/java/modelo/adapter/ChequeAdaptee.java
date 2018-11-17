@@ -16,13 +16,11 @@ public class ChequeAdaptee {
     	if(cantidad<=numero) {
     		aceptado=true;
     		this.cantidad=cantidad;
-    		//JOptionPane.showMessageDialog(null, "Tu cheque posee fondos");
     	}
     	else if(cantidad>numero) {
     		aceptado=false;
-    		//JOptionPane.showMessageDialog(null, "Lo sentimos tu cheque no posee fondos");
     	}
-       
+    	JOptionPane.showMessageDialog(null, "Tu saldo es: "+numero);
     }
 
     public boolean girarCheque() {

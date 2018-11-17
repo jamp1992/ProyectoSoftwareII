@@ -22,5 +22,8 @@ public class PagoAdmin extends PagoConjunto {
 	public PagoAdmin(int idPago, Date fechaPago, Double valorPago, boolean pagado) {
 		super(idPago, fechaPago, valorPago, pagado);
 	}
+	public PagoAdmin(Date fechaPago, Double valorPago, boolean pagado) {
+		super(fechaPago, valorPago, pagado);
+	}
 	
 }

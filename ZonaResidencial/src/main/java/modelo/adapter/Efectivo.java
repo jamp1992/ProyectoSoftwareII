@@ -13,9 +13,6 @@ import modelo.singleton.CuentaCorrienteSingleton;
 
 public class Efectivo extends IMetodoPagoAdapter {
 	
-	List<Object> listaPrincipal = new ArrayList<Object>();
-	List<Residente> listaResidente = new ArrayList<>();
-	List<PagoAdmin> listaPago=new ArrayList<>();
 	
     public Efectivo(double cantidad, Date fechaPago) {
 		super(cantidad, fechaPago);
@@ -23,12 +20,7 @@ public class Efectivo extends IMetodoPagoAdapter {
     
 	public Efectivo(DatosPagoDTO datosPago, Residente residente) {
 		super(datosPago, residente);
-		listaPrincipal.add(listaResidente);
-		listaPrincipal.add(listaPago);
-		
 	}
-
-
 
 	@Override
 	public boolean pagar() {

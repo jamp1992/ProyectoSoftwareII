@@ -95,6 +95,7 @@ public class PanelTorre extends JPanel {
 		
 		
 		JButton btnBuscar = new JButton("Buscar Torre");
+		btnBuscar.setActionCommand("mTorre");
 		btnBuscar.setBounds(110, 11, 120, 23);
 		btnBuscar.addActionListener(new ControladorPanelTorre(this));
 		add(btnBuscar);
@@ -109,6 +110,7 @@ public class PanelTorre extends JPanel {
 		textid.setColumns(10);
 		
 		btnMostrarApto = new JButton("Mostrar Aptos");
+		btnMostrarApto.setActionCommand("mApto");
 		btnMostrarApto.setBounds(655, 11, 120, 23);
 		btnMostrarApto.addActionListener(new ControladorPanelTorre(this));
 		btnMostrarApto.setEnabled(false);

@@ -104,8 +104,6 @@ public class AdministradorSingleton {
 				e=empleados.get(i);
 		}
     	return e;
-    	//return "Todo bien";
-    	//JOptionPane.showMessageDialog(null, empleados.get(0).getNombre()+"  "+empleados.get(1).getNombre());
     	
     }
     public Residente buscarResidente(List<Residente> listaRes, int idCedula) {
@@ -205,9 +203,8 @@ public class AdministradorSingleton {
 	
 	public boolean ingresarSistema(String usuario,String contrasena,String usuarioAdmin, String contrasenaAdmin) {
 		boolean estado=false;
-		if(usuarioAdmin==usuario && contrasenaAdmin==contrasena) {
+		if(usuarioAdmin.equals(usuario) && contrasenaAdmin.equals(contrasena)) {
 			estado=true;
-			
 		}
 			
 		return estado;

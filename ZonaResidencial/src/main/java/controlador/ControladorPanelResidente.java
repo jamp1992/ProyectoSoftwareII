@@ -12,13 +12,16 @@ import javax.swing.JOptionPane;
 import modelo.builder.Torre;
 import modelo.factorymethod.AptoDAO;
 import modelo.factorymethod.EstacionamientoDAO;
+import modelo.factorymethod.PagoConjuntoDAO;
 import modelo.factorymethod.TorreDAO;
 import modelo.otros.Estacionamiento;
+import modelo.otros.PagoAdmin;
 import modelo.persona.Empleado;
 import modelo.persona.Residente;
 import modelo.prototype.AptoImpl;
 import modelo.singleton.AdministradorSingleton;
 import modelo.singleton.ConjuntoResidencialSingleton;
+import modelo.otros.PagoAdmin;
 import vista.PanelResidente;
 
 public class ControladorPanelResidente implements ActionListener {
@@ -29,6 +32,7 @@ public class ControladorPanelResidente implements ActionListener {
 	private Date dateFechaPagoAdmin;
 	private EstacionamientoDAO EDAOActualizar;
 	private AptoDAO ADAOActualizar;
+	private PagoConjuntoDAO PCDAO = new PagoConjuntoDAO();
 	private AdministradorSingleton admin=AdministradorSingleton.getInstance();
 	private ConjuntoResidencialSingleton crs=ConjuntoResidencialSingleton.getInstance();
 
@@ -46,10 +50,15 @@ public class ControladorPanelResidente implements ActionListener {
 			admin.gestionarResidente().crearResidente(residente, Integer.parseInt(pr.textIdEstacionamiento.getText()), crs.getIdConjunto(),Integer.parseInt(pr.textIdApto.getText()));
 			//Cuando se registra un residente, acontinuacion se actualiza el estado del estacionamiento seleccionado, actualizando de estado disponible a no disponible
 			EDAOActualizar= new EstacionamientoDAO();
-			EDAOActualizar.ModificarEstacionamiento(new Estacionamiento(Integer.parseInt(pr.textIdEstacionamiento.getText()),"No disponible"));
+			Estacionamiento estacionamiento = new Estacionamiento(Integer.parseInt(pr.textIdEstacionamiento.getText()),"No disponible");
+			EDAOActualizar.ModificarEstacionamiento(estacionamiento);
 			//Cuando se registra un residente, acontinuacion se actualiza el estado del apto seleccionado, actualizando de estado disponible a no disponible
 			ADAOActualizar = new AptoDAO();
 			ADAOActualizar.ModificarApto(new AptoImpl(Integer.parseInt(pr.textIdApto.getText()),"No disponible"));
+			//PagoAdmin pagoAdmin = new PagoAdmin(new Date,dateFechaPagoAdmin,Double.parseDouble(pr.textValorAdmin.getText()),false,Integer.parseInt(pr.textCedula.getText()));
+			
+			PagoAdmin pagoAdmin = new PagoAdmin(dateFechaPagoAdmin,Double.parseDouble(pr.textValorAdmin.getText()),false);
+			PCDAO.savePagoAdmin(pagoAdmin, Integer.parseInt(pr.textCedula.getText()));
 			break;
 			
 		case "Buscar Residente":

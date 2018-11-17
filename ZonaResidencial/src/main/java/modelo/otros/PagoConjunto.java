@@ -13,7 +13,6 @@ public class PagoConjunto {
     }
     
     public PagoConjunto(Date fechaPago, Double valorPago) {
-		super();
 		this.fechaPago = fechaPago;
 		this.valorPago = valorPago;
 	}
@@ -21,14 +20,12 @@ public class PagoConjunto {
     
     
 	public PagoConjunto(Date fechaPago, Double valorPago, boolean pagado) {
-		super();
 		this.fechaPago = fechaPago;
 		this.valorPago = valorPago;
 		this.pagado = pagado;
 	}
 
 	public PagoConjunto(int idPago, Date fechaPago, Double valorPago) {
-		super();
 		this.idPago = idPago;
 		this.fechaPago = fechaPago;
 		this.valorPago = valorPago;

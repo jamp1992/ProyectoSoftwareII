@@ -22,10 +22,6 @@ public class PanelLogin extends JFrame {
 	public JPasswordField pwcontrasena;
 	public JTextField textusuario;
 	public JComboBox<String> rol;
-
-	/**
-	 * Launch the application.
-	 */
         
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,9 +38,6 @@ public class PanelLogin extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public PanelLogin() {
 		setTitle("\t\t\t\t\t\t\t\tLogin");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

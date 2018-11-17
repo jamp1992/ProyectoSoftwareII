@@ -4,13 +4,17 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import modelo.adapter.ChequeAdapter;
 import modelo.adapter.DebitoAdapter;
 import modelo.adapter.Efectivo;
 import modelo.adapter.IMetodoPagoAdapter;
 import modelo.adapter.OnlineAdapter;
+import modelo.factorymethod.NotificacionDAO;
 import modelo.otros.DatosPagoDTO;
 import modelo.otros.Estacionamiento;
+import modelo.otros.Notificacion;
 import modelo.otros.PagoAdmin;
 import modelo.otros.PagoConjunto;
 import modelo.prototype.AptoImpl;
@@ -110,51 +114,6 @@ public class Residente extends PersonaAcceso {
 		this.pagoConjunto = pagoConjunto;
 	}
 	
-	public  IMetodoPagoAdapter pagarAdmin(double valorPago, Date fecha, int numeroTarjeta, int numeroCheque, String nombreReceptor, int numeroCuenta, Residente residente, String sel) {
-		
-		IMetodoPagoAdapter ip=null;
-		
-		try {
-			Class c = Class.forName("modelo.adapter."+sel);
-			
-			//c.getConstructor(DatosPagoDTO.class, Residente.class);
-			
-			
-			ip = (IMetodoPagoAdapter) c.newInstance();
-			ip.pagar();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if(sel=="Efectivo") {
-		IMetodoPagoAdapter pagoEfectivo = new Efectivo(valorPago,fecha);
-		pagoEfectivo.pagar();
-		ip=pagoEfectivo;
-		}
-		else if(sel=="Debito") {
-			IMetodoPagoAdapter pagoDebito = new DebitoAdapter(valorPago,fecha,numeroTarjeta);
-			pagoDebito.pagar();
-			ip=pagoDebito;
-		}
-		else if(sel=="Cheque") {
-			IMetodoPagoAdapter pagoCheque = new ChequeAdapter(valorPago,fecha,numeroCheque,nombreReceptor,numeroCuenta);
-			pagoCheque.pagar();
-			ip=pagoCheque;
-		}
-		else if(sel=="Online") {
-			IMetodoPagoAdapter pagoOnline = new OnlineAdapter(valorPago,fecha,numeroTarjeta,residente);
-			pagoOnline.pagar();
-			ip=pagoOnline;
-		}
-		return ip;
-	}
 	
 public  IMetodoPagoAdapter pagarAdmin(DatosPagoDTO datosPago, Residente residente, String sel) {
 		
@@ -213,6 +172,32 @@ public  IMetodoPagoAdapter pagarAdmin(DatosPagoDTO datosPago, Residente resident
 		}
 		return estado;
 	}
+	public boolean ingresarSistema(String usuario, String contrasena, List<Residente> residenteList) {
+		boolean estado=false;
+		for(Residente res: residenteList) {
+			if(usuario.equals(res.getUsuario())&&contrasena.equals(res.getContrasena())) {
+				estado=true;
+			}
+		}
+		return estado;
+	}
 	
+	public void RevisarNotificacion(NotificacionDAO notificacionDAO, List<Residente> residenteList, String usuario, String contrasena) {
+		Residente residente=null;
+		List<Notificacion> notificacionList = new ArrayList<>();
+		for(Residente res:residenteList) {
+			if(res.getUsuario().equals(usuario)&&res.getContrasena().equals(contrasena)) {
+				residente=res;
+			}
+		}
+		notificacionList=notificacionDAO.ListarNotificacionesPorResidente(residente.getCedula());
+		
+		if(notificacionList.isEmpty()==false) {
+			JOptionPane.showMessageDialog(null, notificacionList.get(notificacionList.size()-1).getMensaje());
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "No tiene notificaciones pendientes...");
+		}
+	}
 
 }

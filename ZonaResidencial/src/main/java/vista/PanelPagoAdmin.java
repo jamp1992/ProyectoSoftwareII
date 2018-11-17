@@ -64,6 +64,7 @@ public class PanelPagoAdmin extends JPanel {
 	add(paneldatos);
 	paneldatos.setLayout(null);
 	
+	
 	JLabel lblCedula= new JLabel("Cedula");
 	lblCedula.setBounds(10, 30, 100, 20);
 	paneldatos.add(lblCedula);
@@ -129,24 +130,9 @@ public class PanelPagoAdmin extends JPanel {
 	paneldatos.add(textCantidad);
 	
 	JButton btnPagarEfectivo= new JButton("Pagar");
-	btnPagarEfectivo.setBounds(10, 240, 150, 20);
+	btnPagarEfectivo.setBounds(120, 270, 100, 20);
 	btnPagarEfectivo.addActionListener(new ControladorPanelPagoAdminCliente(this));
 	paneldatos.add(btnPagarEfectivo);
-	
-	JButton btnPagarDebito= new JButton("Pagar Debito");
-	btnPagarDebito.setBounds(10, 270, 150, 20);
-	btnPagarDebito.addActionListener(new ControladorPanelPagoAdminCliente(this));
-	paneldatos.add(btnPagarDebito);
-	
-	JButton btnPagarCheque= new JButton("Pagar Cheque");
-	btnPagarCheque.setBounds(10, 300, 150, 20);
-	btnPagarCheque.addActionListener(new ControladorPanelPagoAdminCliente(this));
-	paneldatos.add(btnPagarCheque);
-	
-	JButton btnPagarOnline= new JButton("Pagar Online");
-	btnPagarOnline.setBounds(10, 330, 150, 20);
-	btnPagarOnline.addActionListener(new ControladorPanelPagoAdminCliente(this));
-	paneldatos.add(btnPagarOnline);
 	
 	
 	radioButtonEfectivo=new JRadioButton("Efectivo",false);
@@ -206,10 +192,10 @@ public class PanelPagoAdmin extends JPanel {
 		table = new JTable();
         modeloTabla = new DefaultTableModel(
 	new Object[][] {
-		{null, null, null, null},
+		{null, null, null, null,null,null},
 	},
 	new String[] {
-		"Cedula ","Nombre","Fecha Pago Admin","Valor Admin","Pagado"
+		"Cedula ","Nombre","Fecha Pago Admin","Valor Admin","Pagado","idPago"
 	}
 );
         table.setForeground(new Color(0, 0, 0));

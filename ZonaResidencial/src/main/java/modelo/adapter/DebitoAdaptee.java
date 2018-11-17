@@ -16,8 +16,8 @@ public class DebitoAdaptee {
     	
     	double numero = (Math.random() * 1000000) + 1;
     	if(cantidad<=numero) {
-    		aceptado=true;
     		this.cantidad=cantidad;
+    		aceptado=true;
     	}
     	else if(cantidad>numero) {
     		aceptado=false;
@@ -31,7 +31,6 @@ public class DebitoAdaptee {
     		CuentaCorrienteSingleton CC1=CuentaCorrienteSingleton.getInstance();
     		CC1.sumarSaldo(cantidad);
     		estado=true;
-    		
     	}
     	else if(this.aceptado==false) {
     		estado=false;

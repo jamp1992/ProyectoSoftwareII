@@ -27,12 +27,6 @@ public class PersonaAcceso extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-	public void ingresarSistema() {
-        // TODO implement here
-    }
-
 	public String getUsuario() {
 		return usuario;
 	}

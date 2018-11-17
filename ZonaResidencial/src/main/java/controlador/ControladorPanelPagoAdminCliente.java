@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import modelo.adapter.Efectivo;
 import modelo.adapter.IMetodoPagoAdapter;
 import modelo.factorymethod.CuentaCorrienteDAO;
+import modelo.factorymethod.NotificacionDAO;
 import modelo.factorymethod.PagoConjuntoDAO;
 import modelo.otros.DatosPagoDTO;
 import modelo.otros.PagoAdmin;
@@ -26,12 +27,13 @@ public class ControladorPanelPagoAdminCliente implements ActionListener {
 
 	private PanelPagoAdmin ppa;
 	private PagoConjuntoDAO PCDAO = new PagoConjuntoDAO();
+	private NotificacionDAO NDAO = new NotificacionDAO();
 	private CuentaCorrienteDAO CCDAO;
 	private CuentaCorrienteSingleton CC1=CuentaCorrienteSingleton.getInstance();
 	private Residente residente;
 	private SimpleDateFormat formatoFecha;
 	private Date fecha;
-	private PagoConjunto pagoConjunto;
+	private PagoAdmin pagoAdmin;
 	private AdministradorSingleton admin=AdministradorSingleton.getInstance();
 	private List<PagoAdmin> listaPagoAdmin= new ArrayList<>();
 	private DatosPagoDTO datosPago;
@@ -44,10 +46,13 @@ public class ControladorPanelPagoAdminCliente implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		switch(event.getActionCommand()) {
+		case"Revisar notificacion":
+			JOptionPane.showMessageDialog(null, "No tiene notificaciones");
+			break;
 		case"Mostrar Pago Pendiente":
-			listaPagoAdmin=PCDAO.ListarPagoAdmin(Integer.parseInt(ppa.textId.getText()));
-			residente=admin.buscarResidente(admin.gestionarResidente().MostrarResidentes(),Integer.parseInt(ppa.textId.getText()));
 			
+			residente=admin.buscarResidente(admin.gestionarResidente().MostrarResidentes(),Integer.parseInt(ppa.textId.getText()));
+			listaPagoAdmin=PCDAO.ListarPagoAdmin(residente.getCedula());
 					
 			
 				for(int i=this.ppa.modeloTabla.getRowCount(); i>0; i--){
@@ -55,159 +60,81 @@ public class ControladorPanelPagoAdminCliente implements ActionListener {
                 }
 				
 				for(int j=0;j<listaPagoAdmin.size();j++) {
-					this.ppa.modeloTabla.addRow(new Object[]{residente.getCedula(),residente.getNombre(),listaPagoAdmin.get(j).getFechaPago(),listaPagoAdmin.get(j).getValorPago(),listaPagoAdmin.get(j).isPagado()});
+					this.ppa.modeloTabla.addRow(new Object[]{residente.getCedula(),residente.getNombre(),listaPagoAdmin.get(j).getFechaPago(),listaPagoAdmin.get(j).getValorPago(),listaPagoAdmin.get(j).isPagado(),listaPagoAdmin.get(j).getIdPago()});
 				}
-				ppa.textCedula.setText(String.valueOf(residente.getCedula()));
-				ppa.textNombre.setText(residente.getNombre());
-				ppa.textCantidad.setText(String.valueOf(listaPagoAdmin.get(0).getValorPago()));
-				
-				
-			
-			
-			break;
-		case"Pagar Efectivo":
-			formatoFecha=new SimpleDateFormat("dd/MM/yyyy");
-			fecha=new Date();
-			formatoFecha.format(fecha);
-			JOptionPane.showMessageDialog(null, fecha);
-			
-			
-			residente=admin.buscarResidente(admin.gestionarResidente().MostrarResidentes(),Integer.parseInt(ppa.textId.getText()));
-			
-			
-			if(residente.pagarAdmin(Double.parseDouble(ppa.textCantidad.getText()), fecha,0,0,"Nada",0,null,"Efectivo").pagar()==true) {
-				pagoConjunto =new PagoConjunto(fecha,Double.parseDouble(ppa.textCantidad.getText()));
-				PCDAO= new PagoConjuntoDAO();
-				PCDAO.savePagoAdmin(pagoConjunto, Integer.parseInt(ppa.textCantidad.getText()));
-				CCDAO= new CuentaCorrienteDAO();
-				CCDAO.ModificarCuentaCorriente(CC1);
-				JOptionPane.showMessageDialog(null, "Has pagado con efectivo");
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "Pago en efectivo no realizado...");
-			}
 			break;
 			
-		case"Pagar Debito":
-			formatoFecha=new SimpleDateFormat("dd/MM/yyyy");
-			try {
-				fecha=new Date();
-				fecha=formatoFecha.parse(ppa.textFecha.getText());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			
-			residente= new Residente();
-			
-			
-			//residente.pagarAdmin(Double.parseDouble(ppa.textCantidad.getText()), fecha);
-			if(residente.pagarAdmin(Double.parseDouble(ppa.textCantidad.getText()), fecha,Integer.parseInt(ppa.textTarjeta.getText()),0,"",0,null,"Debito").pagar()==true) {
-				/*pagoConjunto =new PagoConjunto(fecha,Double.parseDouble(ppa.textCantidad.getText()));
-				PCDAO= new PagoConjuntoDAO();
-				PCDAO.savePagoAdmin(pagoConjunto, Integer.parseInt(ppa.textCantidad.getText()));
-				CCDAO= new CuentaCorrienteDAO();
-				CCDAO.ModificarCuentaCorriente(CC1);*/
-				JOptionPane.showMessageDialog(null, "Has realizado tu pago...gracias!!!");
-			}
-			else
-				JOptionPane.showMessageDialog(null, "Sin saldo suficiente");
-			break;
-			
-		case"Pagar Cheque":
-			formatoFecha=new SimpleDateFormat("dd/MM/yyyy");
-			try {
-				fecha=new Date();
-				fecha=formatoFecha.parse(ppa.textFecha.getText());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			
-			residente= new Residente();
-			
-			
-			//residente.pagarAdmin(Double.parseDouble(ppa.textCantidad.getText()), fecha);
-			if(residente.pagarAdmin(Double.parseDouble(ppa.textCantidad.getText()), fecha,0,Integer.parseInt(ppa.textCheque.getText()),ppa.textReceptorCheque.getText(),Integer.parseInt(ppa.textCuenta.getText()),null,"Cheque").pagar()==true) {
-				/*pagoConjunto =new PagoConjunto(fecha,Double.parseDouble(ppa.textCantidad.getText()));
-				PCDAO= new PagoConjuntoDAO();
-				PCDAO.savePagoAdmin(pagoConjunto, Integer.parseInt(ppa.textCantidad.getText()));
-				CCDAO= new CuentaCorrienteDAO();
-				CCDAO.ModificarCuentaCorriente(CC1);*/
-				JOptionPane.showMessageDialog(null, "Cheque girado...gracias!!!");
-			}
-			else
-				JOptionPane.showMessageDialog(null, "Tu cheque no se ha girado");
-			break;
-		case "Pagar Online":
-			formatoFecha=new SimpleDateFormat("dd/MM/yyyy");
-			try {
-				fecha=new Date();
-				fecha=formatoFecha.parse(ppa.textFecha.getText());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			
-			residente= new Residente(Integer.parseInt(ppa.textCedula.getText()),ppa.textNombre.getText());
-			
-			
-			if(residente.pagarAdmin(Double.parseDouble(ppa.textCantidad.getText()), fecha,Integer.parseInt(ppa.textTarjeta.getText()),0,"",0,residente,"Efectivo").pagar()==true) {
-				/*pagoConjunto =new PagoConjunto(fecha,Double.parseDouble(ppa.textCantidad.getText()));
-				PCDAO= new PagoConjuntoDAO();
-				PCDAO.savePagoAdmin(pagoConjunto, Integer.parseInt(ppa.textCantidad.getText()));
-				CCDAO= new CuentaCorrienteDAO();
-				CCDAO.ModificarCuentaCorriente(CC1);*/
-				JOptionPane.showMessageDialog(null, "Pago Online realizado");
-			}
-			else
-				JOptionPane.showMessageDialog(null, "Pago Online no realizado...");
-			break;
 		case"Efectivo":
 			ppa.textCedula.setEnabled(false);
+			ppa.textCedula.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),0)));
 			ppa.textNombre.setEnabled(false);
+			ppa.textNombre.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),1)));
 			ppa.textTarjeta.setEnabled(false);
 			ppa.textCuenta.setEnabled(false);
 			ppa.textReceptorCheque.setEnabled(false);
 			ppa.textCheque.setEnabled(false);
-			ppa.textCantidad.setEnabled(true);
+			ppa.textCantidad.setEnabled(false);
+			ppa.textCantidad.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),3)));
 			break;
-		case"Debito":
+		case"DebitoAdapter":
 			ppa.textCedula.setEnabled(false);
+			ppa.textCedula.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),0)));
 			ppa.textNombre.setEnabled(false);
+			ppa.textNombre.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),1)));
 			ppa.textTarjeta.setEnabled(true);
 			ppa.textCuenta.setEnabled(false);
 			ppa.textReceptorCheque.setEnabled(false);
 			ppa.textCheque.setEnabled(false);
 			ppa.textCantidad.setEnabled(true);
+			ppa.textCantidad.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),3)));
 			break;
-		case"Cheque":
+		case"ChequeAdapter":
 			ppa.textCedula.setEnabled(false);
+			ppa.textCedula.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),0)));
 			ppa.textNombre.setEnabled(false);
+			ppa.textNombre.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),1)));
 			ppa.textTarjeta.setEnabled(false);
 			ppa.textCuenta.setEnabled(true);
 			ppa.textReceptorCheque.setEnabled(true);
 			ppa.textCheque.setEnabled(true);
 			ppa.textCantidad.setEnabled(true);
+			ppa.textCantidad.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),3)));
 			break;
-		case"Online":
+		case"OnlineAdapter":
 			ppa.textCedula.setEnabled(false);
+			ppa.textCedula.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),0)));
 			ppa.textNombre.setEnabled(false);
+			ppa.textNombre.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),1)));
 			ppa.textTarjeta.setEnabled(true);
 			ppa.textCuenta.setEnabled(false);
 			ppa.textReceptorCheque.setEnabled(false);
 			ppa.textCheque.setEnabled(false);
 			ppa.textCantidad.setEnabled(true);
+			ppa.textCantidad.setText(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),3)));
 			break;
 		case "Pagar":
-			formatoFecha=new SimpleDateFormat("dd/MM/yyyy");
-			fecha=new Date();
-			formatoFecha.format(fecha);
-			
-			
-			residente=admin.buscarResidente(admin.gestionarResidente().MostrarResidentes(),Integer.parseInt(ppa.textId.getText()));
-			datosPago=new DatosPagoDTO(Double.parseDouble(ppa.textCantidad.getText()), fecha,Integer.parseInt(ppa.textTarjeta.getText()), Integer.parseInt(ppa.textCheque.getText()),ppa.textReceptorCheque.getText(),Integer.parseInt(ppa.textCuenta.getText()));
-			String sel=ppa.grupoBoton.getSelection().getActionCommand();
-			//residente.pagarAdmin(datosPago, residente, sel);
-			
-			JOptionPane.showMessageDialog(null,residente.pagarAdmin(datosPago, residente, sel).pagar());
+			if(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),4)).equals("true")) {
+				JOptionPane.showMessageDialog(null, "Pago ya realizado");
+			}
+			else {
+				formatoFecha=new SimpleDateFormat("dd/MM/yyyy");
+				fecha=new Date();
+				formatoFecha.format(fecha);
+				residente=admin.buscarResidente(admin.gestionarResidente().MostrarResidentes(),Integer.parseInt(ppa.textId.getText()));
+				datosPago=new DatosPagoDTO(Double.parseDouble(ppa.textCantidad.getText()), fecha,Integer.parseInt(ppa.textTarjeta.getText()), Integer.parseInt(ppa.textCheque.getText()),ppa.textReceptorCheque.getText(),Integer.parseInt(ppa.textCuenta.getText()));
+				String sel=ppa.grupoBoton.getSelection().getActionCommand();
+				if(residente.pagarAdmin(datosPago, residente, sel).pagar()==true) {
+					PCDAO= new PagoConjuntoDAO();
+					PCDAO.actualizarPagoAdmin(Integer.parseInt(String.valueOf(this.ppa.modeloTabla.getValueAt(this.ppa.table.getSelectedRow(),5))));
+					CCDAO= new CuentaCorrienteDAO();
+					CCDAO.ModificarCuentaCorriente(CC1);
+					NDAO.BorrarNotificacion(Integer.parseInt(ppa.textId.getText()));
+					JOptionPane.showMessageDialog(null, "Pago realizado...");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Pago no realizado...");
+				}
+			}
 			break;
 					
 		}

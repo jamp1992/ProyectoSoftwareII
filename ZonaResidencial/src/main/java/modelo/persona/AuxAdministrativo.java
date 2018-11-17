@@ -1,5 +1,6 @@
 package modelo.persona;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,8 +10,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import modelo.factorymethod.PagoConjuntoDAO;
+import modelo.otros.Notificacion;
 import modelo.otros.PagoAdmin;
-import modelo.otros.PagoConjunto;
+
 
 public class AuxAdministrativo extends Empleado {
 	
@@ -23,16 +25,28 @@ public class AuxAdministrativo extends Empleado {
 	
 	
 	public AuxAdministrativo() {
-		super();
 	}
+	
 
-
-
-	public void notificarPagoAdminResidente(Residente residente, double valor) {
-		
+	public Notificacion notificarPagoAdminResidente(double pago, String fechaPago) {
+		Calendar fechaActual = Calendar.getInstance();
+		Calendar fechaPagoAdmin = Calendar.getInstance();
+		SimpleDateFormat sdformato=new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			fechaPagoAdmin.setTime(sdformato.parse(fechaPago));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if(fechaActual.get(Calendar.DAY_OF_MONTH)<=fechaPagoAdmin.get(Calendar.DAY_OF_MONTH)) {
+			Notificacion notificacion= new Notificacion(fechaActual.getTime(),"Su pago se vence en '"+(fechaPagoAdmin.get(Calendar.DAY_OF_MONTH)-fechaActual.get(Calendar.DAY_OF_MONTH))+"' dias, por '" +pago+ "'$, se vence el '" +fechaPago+ "', PAGUE ROSCON.");
+			return notificacion;
+		}
+		else {
+		Notificacion notificacion= new Notificacion(fechaActual.getTime(),"Su pago por '" +pago+ "' ha vencido, Contacte al Aux Administrativo");
+		return notificacion;
+		}
 	}
 	public void cobrarAdmin(List<Residente> residente) {
-		
 		
 		Calendar calendarActual = Calendar.getInstance();
 		Calendar calendar = Calendar.getInstance();
@@ -41,35 +55,34 @@ public class AuxAdministrativo extends Empleado {
 		sdf.format(fecha);
 		PagoConjuntoDAO PCDAO= new PagoConjuntoDAO();
 		List<Residente> listaResidente= new ArrayList<>();
-		List<Residente> listaResidenteActualizada=new ArrayList<>();
 		List<PagoAdmin> listaPagoAdmin=new ArrayList<>();
 		listaResidente=residente;
 		
-	
-	
-		for(Residente res:listaResidente) {
-			listaPagoAdmin=PCDAO.ListarPagoAdmin(res.getCedula());
-			calendar.setTime(res.getFechaPagoAdmin());
-			
-			if(calendarActual.get(Calendar.DAY_OF_MONTH)!=calendar.get(Calendar.DAY_OF_MONTH)-5) {
-				listaResidenteActualizada.add(res);
+		for(int i=0;i<listaResidente.size();i++) {
+			listaPagoAdmin=PCDAO.ListarPagoAdmin(listaResidente.get(i).getCedula());
+			calendar.setTime(listaPagoAdmin.get(listaPagoAdmin.size()-1).getFechaPago());
+			if(calendarActual.get(Calendar.YEAR)==calendar.get(Calendar.YEAR)&&calendarActual.get(Calendar.MONTH)!=calendar.get(Calendar.MONTH)&&calendarActual.get(Calendar.DAY_OF_MONTH)==calendar.get(Calendar.DAY_OF_MONTH)-5) {
+				PagoAdmin pagoAdmin= new PagoAdmin(new Date(),listaResidente.get(i).getValorAdmin(),false);
+				PCDAO.savePagoAdmin(pagoAdmin, listaResidente.get(i).getCedula());
 			}
-			/*else {
-				JOptionPane.showMessageDialog(null, "Factura ha sido registrada");
-			}*/
+			else if(calendarActual.get(Calendar.YEAR)!=calendar.get(Calendar.YEAR)&&calendarActual.get(Calendar.MONTH)!=calendar.get(Calendar.MONTH)&&calendarActual.get(Calendar.DAY_OF_MONTH)==calendar.get(Calendar.DAY_OF_MONTH)-5) {
+				PagoAdmin pagoAdmin= new PagoAdmin(new Date(),listaResidente.get(i).getValorAdmin(),false);
+				PCDAO.savePagoAdmin(pagoAdmin, listaResidente.get(i).getCedula());
+			}
+			else {
+			}
 		}
 		
-		for(int i=0;i<listaResidenteActualizada.size();i++) {
-			calendar.setTime(listaResidenteActualizada.get(i).getFechaPagoAdmin());
-			if(calendarActual.get(Calendar.DAY_OF_MONTH)==calendar.get(Calendar.DAY_OF_MONTH)-5) {
-				PagoConjunto pagoConjunto= new PagoConjunto(new Date(),listaResidenteActualizada.get(i).getValorAdmin());
-				PCDAO.savePagoAdmin(pagoConjunto, listaResidenteActualizada.get(i).getCedula());
-			}
-			
-		}
 		
 	}
-	public void ingresarSistema() {
+	public boolean ingresarSistema(String usuario, String contrasena, List<Empleado> auxAdmin) {
+		boolean estado=false;
+		for(Empleado aux: auxAdmin) {
+			if(usuario.equals(aux.getUsuario())&&contrasena.equals(aux.getContrasena())) {
+				estado=true;
+			}
+		}
+		return estado;
 		
 	}
 

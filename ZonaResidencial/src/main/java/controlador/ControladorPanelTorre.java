@@ -97,7 +97,7 @@ public class ControladorPanelTorre implements ActionListener {
                 pt.btnMostrarApto.setEnabled(true);
 				break;
 			
-			case "Mostrar Aptos":
+			case "mApto":
 				List<AptoImpl> listaApto= new ArrayList<>();
 				AptoImpl a;
 				for(int i=this.pt.modeloTablaApto.getRowCount();i>0;i--) {
@@ -110,8 +110,9 @@ public class ControladorPanelTorre implements ActionListener {
                     a=(AptoImpl) itrApto.next();
                     this.pt.modeloTablaApto.addRow(new Object[]{a.getIdAptoImpl(),a.getEstado(),a.getNumeroApto(),a.getValor(),a.getNombreApto(),a.getLargo(),a.getAncho(),a.getM2()});
                 }
+                break;
                 
-			case"Buscar Torre":
+			case"mTorre":
 				TorreDAO tdao= new TorreDAO();
 				Torre torreBusqueda = new Torre();
 				torreBusqueda=admin.buscarTorre(tdao.finAllTorres(), Integer.parseInt(pt.textid.getText()));

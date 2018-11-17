@@ -41,7 +41,6 @@ public class CuentaCorrienteDAO {
 	public boolean ModificarCuentaCorriente(CuentaCorrienteSingleton CCS) {
     	Connection connection=dbAdapter.getConnection();
     	try {
-			
 			PreparedStatement statement=connection.prepareStatement("UPDATE CuentaCorriente SET numeroCuenta='"+CCS.getNumeroCuenta()+"', nombreCuenta='"+CCS.getNombreCuenta()+"',saldo='"+CCS.getSaldo()+"' "+" WHERE numeroCuenta="+CCS.getNumeroCuenta());
 			statement.executeUpdate();
 			return true;
