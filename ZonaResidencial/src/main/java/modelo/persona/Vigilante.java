@@ -5,6 +5,7 @@ package modelo.persona;
 import java.sql.Date;
 import java.util.List;
 
+import modelo.factorymethod.VisitanteDAO;
 import modelo.otros.Estacionamiento;
 
 /**
@@ -24,15 +25,43 @@ public class Vigilante extends Empleado {
 	}
 
 
+<<<<<<< HEAD
 	public void controlarAccesoVisitante(Visitante visitante) {
        
     }
+=======
+    
+    
+    public VisitanteDAO controlAccesoVisitante () {
+		VisitanteDAO visitante = new VisitanteDAO();
+		return visitante;
+	}
+	
+	//public void controlarAccesoVisitante(Visitante visitante) {
+       
+//   }
+>>>>>>> branch 'master' of https://github.com/jamp1992/ProyectoSoftwareII.git
 
     public void controlarAccesoResidente(Residente residente) {
       
     }
 
     public void asignarParqueaderoResidente(Residente residente, Estacionamiento estacionamiento) {
+<<<<<<< HEAD
+=======
+        // TODO implement here
+    }
+
+    /**
+     * @param Visitante 
+     * @param Estacionamiento 
+     * @return
+     */
+    public Visitante asignarParqueaderoVisitante(int cedula,String nombre, String apellido, Date fecha) {
+    	
+        Visitante visitante=new Visitante(cedula,nombre,apellido,fecha);
+        return visitante;
+>>>>>>> branch 'master' of https://github.com/jamp1992/ProyectoSoftwareII.git
         
     }
     public void asignarParqueaderoVisitante(Visitante visitante, Estacionamiento estacionamiento) {

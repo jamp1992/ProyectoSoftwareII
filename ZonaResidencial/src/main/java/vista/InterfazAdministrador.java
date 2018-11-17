@@ -128,6 +128,15 @@ public class InterfazAdministrador extends JFrame {
 		
 		PanelAcceso acceso =new PanelAcceso();
 		panelControl.add(acceso).setVisible(true);
+
+		JPanel panelAsignacion = new JPanel();
+        panelAsignacion.setBorder(new TitledBorder(null, "Control Visitantes", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		tabbedPane.addTab("Control de Visitantes", null, panelAsignacion, null);
+		panelAsignacion.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		PanelControlAccesoVisitante asignacion =new PanelControlAccesoVisitante();
+		panelAsignacion.add(asignacion).setVisible(true);
+		
 		
 	}
 	
