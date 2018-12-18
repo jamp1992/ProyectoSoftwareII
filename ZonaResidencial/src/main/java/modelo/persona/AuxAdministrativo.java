@@ -38,7 +38,7 @@ public class AuxAdministrativo extends Empleado {
 			e.printStackTrace();
 		}
 		if(fechaActual.get(Calendar.DAY_OF_MONTH)<=fechaPagoAdmin.get(Calendar.DAY_OF_MONTH)) {
-			Notificacion notificacion= new Notificacion(fechaActual.getTime(),"Su pago se vence en '"+(fechaPagoAdmin.get(Calendar.DAY_OF_MONTH)-fechaActual.get(Calendar.DAY_OF_MONTH))+"' dias, por '" +pago+ "'$, se vence el '" +fechaPago+ "', PAGUE ROSCON.");
+			Notificacion notificacion= new Notificacion(fechaActual.getTime(),"Su pago se vence en '"+(fechaPagoAdmin.get(Calendar.DAY_OF_MONTH)-fechaActual.get(Calendar.DAY_OF_MONTH))+"' dias, por '" +pago+ "'$, se vence el '" +fechaPago+ "', PAGUE!!!.");
 			return notificacion;
 		}
 		else {
