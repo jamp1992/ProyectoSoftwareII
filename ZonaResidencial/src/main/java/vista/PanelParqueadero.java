@@ -36,11 +36,7 @@ public class PanelParqueadero extends JPanel {
     public DefaultTableModel modeloTablaParqueadero;
     public JTable tableParqueadero;
     public JScrollPane scroll;
-    /**
-	 * 
-	 */
     
-    private static final long serialVersionUID = 1L;
 
 	public PanelParqueadero() {
 		
@@ -105,7 +101,7 @@ public class PanelParqueadero extends JPanel {
 		paneldatos.add(textCedula);
 		
 		
-		JLabel lblNApto= new JLabel("N° Apto");
+		JLabel lblNApto= new JLabel("Nï¿½ Apto");
 		lblNApto.setBounds(30, 140, 100, 20);
 		paneldatos.add(lblNApto);
 		textN_Apto= new JTextField();

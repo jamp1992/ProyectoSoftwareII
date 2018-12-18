@@ -33,11 +33,7 @@ public class PanelMantenimiento extends JPanel {
     public DefaultTableModel modeloTablaMantenimiento;
     public JTable tableMantenimiento;
     public JScrollPane scroll;
-    /**
-	 * 
-	 */
-    
-    private static final long serialVersionUID = 1L;
+  
 
 	public PanelMantenimiento() {
 		
@@ -101,7 +97,7 @@ public class PanelMantenimiento extends JPanel {
 		paneldatos.add(textCedula);
 		
 		
-		JLabel lblNApto= new JLabel("N° Apto");
+		JLabel lblNApto= new JLabel("Nï¿½ Apto");
 		lblNApto.setBounds(30, 140, 100, 20);
 		paneldatos.add(lblNApto);
 		textN_Apto= new JTextField();

@@ -29,7 +29,6 @@ public class PanelPagos2 extends JPanel {
 	public JScrollPane scroll;
 
 	
-private static final long serialVersionUID = 1L;
 	
 
 
@@ -52,7 +51,7 @@ new Object[][] {
 	{null, null, null, null, null, null, null},
 },
 new String[] {
-	"Nombre ","Cedula","N° Apto", "Id_Torre", "Administración", "Mantenimiento"
+	"Nombre ","Cedula","Nï¿½ Apto", "Id_Torre", "Administraciï¿½n", "Mantenimiento"
 }
 );
    table.setForeground(new Color(0, 0, 0));
